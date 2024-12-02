@@ -180,8 +180,8 @@ h2 {
 .testimonial-item img,
 .product-image {
   width: 100%;
-  height: 160px; /* Set the same height across other sections */
-  object-fit: cover;
+  height: 200px; /* Set the same height across other sections */
+  object-fit: contain; /* Keeps aspect ratio */
 }
 
 .category-item h3 {

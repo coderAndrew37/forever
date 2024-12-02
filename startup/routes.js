@@ -7,6 +7,7 @@ const contacts = require("../routes/contacts.js");
 const quiz = require("../routes/quiz.js");
 const newsletter = require("../routes/newsletter.js");
 const orders = require("../routes/orders.js");
+const packs = require("../routes/packs.js");
 module.exports = function (app) {
   app.use("/api/products", products);
   app.use("/api/users", auth);
@@ -17,4 +18,5 @@ module.exports = function (app) {
   app.use("/api/submit-quiz", quiz); // Added the quiz route
   app.use("/api/newsletter", newsletter); // Added the newsletter route
   app.use("/api/orders", orders);
+  app.use("/api/packs", packs);
 };

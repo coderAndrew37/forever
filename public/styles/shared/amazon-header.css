@@ -39,8 +39,9 @@
 }
 
 .amazon-logo {
-  width: 100px;
-  margin-top: 5px;
+  max-width: 120px; /* Restricts logo width */
+  max-height: 50px; /* Ensures it fits within navbar height */
+  object-fit: contain; /* Keeps aspect ratio */
 }
 
 .amazon-mobile-logo {

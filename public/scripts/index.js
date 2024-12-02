@@ -7,6 +7,7 @@ import {
   renderFAQs,
   renderTestimonials,
   renderSpecialOffers,
+  renderPacks,
 } from "./utils/renderUtils.js";
 
 import { faqs } from "./data/faqsData.js";
@@ -102,4 +103,32 @@ searchBar.addEventListener("input", () => {
   } else {
     suggestionsDropdown.style.display = "none";
   }
+});
+
+const packs = [
+  {
+    slug: "c9-pack",
+    name: "C9 Pack",
+    image: "/images/packs/c9-pack.jpg",
+    description:
+      "The C9 Pack is designed to kickstart your journey to a healthier you by cleansing and rejuvenating your body.",
+  },
+  {
+    slug: "sonya-pack",
+    name: "Sonya Pack",
+    image: "/images/packs/sonya-pack.jpg",
+    description:
+      "A revolutionary skincare system designed to moisturize, cleanse, and provide radiant-looking skin.",
+  },
+  {
+    slug: "infinite-pack",
+    name: "Infinite Pack",
+    image: "/images/packs/infinite-pack.jpg",
+    description:
+      "Infinite by Forever Pack is an advanced skincare system to combat aging and keep your skin healthy.",
+  },
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderPacks(packs, ".packs-section .grid");
 });

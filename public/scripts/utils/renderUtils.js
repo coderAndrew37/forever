@@ -1,5 +1,35 @@
 import { formatCurrency } from "./money.js";
 import { initAddToCartListeners } from "./cartUtils.js";
+
+//rendering packs
+export function renderPacks(packs, containerSelector) {
+  const packsGrid = document.querySelector(containerSelector);
+  if (!packsGrid) return;
+
+  packsGrid.innerHTML = packs
+    .slice(0, 3) // Show only three packs
+    .map(
+      (pack) => `
+      <div class="pack-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="${pack.image}" alt="${pack.name}" class="w-full h-40 object-cover">
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-gray-800">${pack.name}</h3>
+          <p class="text-gray-600 text-sm mt-2 line-clamp-3">${pack.description}</p>
+          <div class="mt-4">
+            <a
+              href="/pack.html?category=${pack.slug}"
+              class="text-blue-500 font-medium hover:underline"
+            >
+              Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    `
+    )
+    .join("");
+}
+
 export function renderProducts(products, containerSelector) {
   const productsGrid = document.querySelector(containerSelector);
   if (!productsGrid) return;
