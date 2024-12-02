@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kenya Clothing Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <!-- GSAP and ScrollTrigger CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="/styles/shared/general.css" />
+    <link rel="stylesheet" href="/styles/shared/amazon-header.css" />
+    <link rel="stylesheet" href="/styles/pages/amazon.css" />
+    <link rel="stylesheet" href="/styles/shared/skeletons.css" />
+    <link rel="stylesheet" href="/styles/pages/quiz.css" />
+    <link rel="stylesheet" href="/styles/pages/contact.css" />
+    <link rel="stylesheet" href="/styles/shared/sidebar-animations.css" />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div
+      class="js-sidebar sidebar sidebar-closed fixed top-0 left-0 h-full w-64 bg-gray-900 text-white z-50 shadow-lg"
+    >
+      <nav class="p-4 space-y-4">
+        <button
+          class="js-menu-close p-2 bg-red-500 text-white rounded-lg"
+          aria-label="Close Menu"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+        <a href="/" class="block text-lg font-bold text-yellow-500">Home</a>
+        <a href="/exclusive-deals.html" class="block text-lg"
+          >Exclusive Deals</a
+        >
+        <a href="/about.html" class="block text-lg">About Us</a>
+        <a href="/contact.html" class="block text-lg">Contact</a>
+      </nav>
+    </div>
+
+    <!-- Overlay -->
+    <div
+      class="js-overlay overlay fixed inset-0 z-40 hidden"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Header section -->
+    <div class="amazon-header">
+      <button class="menu-toggle js-menu-toggle" data-tooltip="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <div class="amazon-header-left-section">
+        <a href="/" class="header-link" data-tooltip="Home">
+          <img
+            class="amazon-logo"
+            src="images/kenya-furniture-logo.png"
+            alt="Kenya Fashion Hub"
+          />
+        </a>
+      </div>
+
+      <div class="amazon-header-middle-section">
+        <input
+          class="search-bar js-search-bar"
+          type="text"
+          placeholder="Search for Clothing..."
+        />
+
+        <button class="search-button js-search-button" data-tooltip="Search">
+          <i class="fas fa-search"></i>
+        </button>
+
+        <div class="suggestions-dropdown js-suggestions-dropdown">
+          <!-- Suggestions will be dynamically generated here -->
+        </div>
+      </div>
+
+      <div class="amazon-header-right-section">
+        <button
+          class="auth-button js-auth-button header-link"
+          data-tooltip="Login/Logout"
+        ></button>
+
+        <a
+          class="cart-link header-link"
+          href="/checkout.html"
+          data-tooltip="Cart"
+        >
+          <img class="cart-icon" src="images/icons/cart-icon.png" alt="Cart" />
+          <div class="cart-quantity js-cart-quantity"></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- Hero Section -->
+
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-container">
+          <!-- Left Column: Centered Text Content with Icons -->
+          <div class="hero-text">
+            <h1>Transform Your Health with Forever Living Essentials</h1>
+            <p>
+              Explore premium health, skincare, and nutritional products that
+              elevate your lifestyle and well-being.
+            </p>
+            <a href="#categories" class="button-primary hero-button"
+              >Explore Our Collection</a
+            >
+          </div>
+
+          <!-- Right Column: Animated Content -->
+          <div class="hero-animation">
+            <img
+              src="/images/forever-hero.jpg"
+              alt="Forever Living Products Showcase"
+              class="animated-image"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Clothing Categories Section -->
+      <div class="categories-section" id="categories"></div>
+
+      <!-- Featured Products Section -->
+      <div class="main" id="featured-products">
+        <h2>Best Sellers</h2>
+        <div class="products-grid js-products-grid">
+          <!-- Dynamic product grid populated by index.js -->
+        </div>
+
+        <!-- Bootstrap Pagination -->
+        <nav aria-label="Product pagination">
+          <ul class="pagination js-pagination">
+            <!-- Dynamic pagination buttons added by index.js -->
+          </ul>
+        </nav>
+
+        <div id="loadingSpinner" class="spinner hidden">
+          <div class="loader"></div>
+        </div>
+      </div>
+
+      <!-- Special Offers Section -->
+      <div class="special-offers-section"></div>
+
+      <!-- Customer Testimonials Section -->
+      <div class="testimonials-section"></div>
+
+      <div class="faq-section"></div>
+
+      <!-- Contact Section -->
+      <section class="py-16 bg-white">
+        <div
+          class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12"
+        >
+          <!-- Contact Form -->
+          <div>
+            <h2 class="text-3xl font-bold text-gray-700 mb-6">
+              <i class="fas fa-edit text-blue-500"></i> Send Us a Message
+            </h2>
+            <form id="contactForm" class="mt-8 space-y-6">
+              <div>
+                <label for="name" class="block text-gray-700 font-medium mb-2"
+                  >Your Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+              <div>
+                <label for="email" class="block text-gray-700 font-medium mb-2"
+                  >Your Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="message"
+                  class="block text-gray-700 font-medium mb-2"
+                  >Your Message</label
+                >
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  class="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  placeholder="Write your message"
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="submit-button w-full bg-yellow-500 text-white py-3 font-bold rounded-lg shadow-lg hover:bg-yellow-600 focus:outline-none"
+              >
+                Send Message
+              </button>
+              <div id="formMessage" class="hidden text-center mt-4"></div>
+              <div class="spinner-container hidden flex justify-center mt-4">
+                <div class="spinner border-t-4 border-yellow-500 w-8 h-8"></div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h2 class="text-3xl font-bold text-gray-700 mb-6">
+              <i class="fas fa-info-circle text-green-500"></i> Contact Info
+            </h2>
+            <ul class="space-y-4">
+              <li class="flex items-center space-x-4">
+                <i class="fas fa-map-marker-alt text-red-500 text-xl"></i>
+                <span class="text-gray-700"
+                  >14 Greenroad St., Nairobi, Kenya</span
+                >
+              </li>
+              <li class="flex items-center space-x-4">
+                <i class="fas fa-envelope text-blue-500 text-xl"></i>
+                <span class="text-gray-700">info@getintouch.we</span>
+              </li>
+              <li class="flex items-center space-x-4">
+                <i class="fas fa-phone text-yellow-500 text-xl"></i>
+                <span class="text-gray-700">+254 746 577 838</span>
+              </li>
+              <li class="flex items-center space-x-4">
+                <i class="fas fa-clock text-teal-500 text-xl"></i>
+                <span class="text-gray-700"
+                  >Monday - Friday: 9:00 AM - 6:00 PM</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Newsletter Section -->
+      <section class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+          <h2 class="text-3xl font-bold text-gray-700">Newsletter</h2>
+          <p class="text-lg text-gray-600 mt-4">
+            Subscribe to our newsletter for updates and offers!
+          </p>
+          <form
+            id="newsletterForm"
+            class="mt-6 flex flex-col sm:flex-row gap-4"
+          >
+            <input
+              type="email"
+              id="newsletterEmail"
+              placeholder="Enter your email"
+              class="w-full sm:w-2/3 px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              required
+            />
+            <button
+              type="submit"
+              class="bg-yellow-500 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-yellow-600 focus:outline-none"
+            >
+              Subscribe
+            </button>
+          </form>
+          <div
+            id="newsletterMessage"
+            class="mt-4 text-center text-gray-700"
+          ></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Menu Toggle Button (Visible on small screens) -->
+    <button class="menu-toggle js-menu-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Floating whatsap button -->
+    <a
+      href="https://wa.me/254746577838?text=Hello%2C%20I%27m%20interested%20in%20learning%20more%20about%20your%20fashion%20products."
+      class="whatsapp-float"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat with us on WhatsApp"
+    >
+      <i class="fab fa-whatsapp"></i>
+      <span class="whatsapp-tooltip">Chat with Me!</span>
+    </a>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top js-scroll-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img
+            src="images/kenya-furniture-logo.png"
+            alt="Kenya Fashion Hub Logo"
+          />
+        </div>
+        <div class="footer-links">
+          <a href="#">Home</a>
+          <a href="#">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+        <div class="social-media-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2024 Kenya Fashion Hub. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script type="module" src="/scripts/index.js"></script>
+  </body>
+</html>

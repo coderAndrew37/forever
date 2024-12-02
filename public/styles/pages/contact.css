@@ -1,0 +1,27 @@
+/* Spinner container to center the spinners */
+.spinner-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+/* Message styling */
+.form-message {
+  margin-top: 15px;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.form-message.success {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.form-message.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}

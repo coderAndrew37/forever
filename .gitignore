@@ -1,0 +1,6 @@
+#adding node modules
+node_modules
+
+.env
+
+seed.js

@@ -1,0 +1,9 @@
+2024-11-05T20:05:29.952Z [ERROR]: Could not connect to MongoDB read ECONNRESET
+2024-11-05T20:06:12.213Z [ERROR]: Could not connect to MongoDB read ECONNRESET
+2024-11-05T20:07:56.778Z [ERROR]: Could not connect to MongoDB read ECONNRESET
+2024-11-05T20:09:35.355Z [ERROR]: Could not connect to MongoDB read ECONNRESET
+2024-12-02T08:58:35.208Z [ERROR]: Not allowed by CORS Not allowed by CORS
+2024-12-02T08:58:46.211Z [ERROR]: Not allowed by CORS Not allowed by CORS
+2024-12-02T08:58:50.864Z [ERROR]: Could not connect to MongoDB read ECONNRESET
+2024-12-02T09:00:21.869Z [ERROR]: Could not connect to MongoDB read ECONNRESET
+2024-12-02T09:02:26.073Z [ERROR]: Could not connect to MongoDB read ECONNRESET

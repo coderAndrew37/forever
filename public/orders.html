@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Orders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Load a font called Roboto from Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Here are the CSS files for this page. -->
+    <link rel="stylesheet" href="/styles/shared/general.css" />
+    <link rel="stylesheet" href="/styles/shared/amazon-header.css" />
+    <link rel="stylesheet" href="/styles/pages/orders.css" />
+  </head>
+  <body>
+    <!-- Header section -->
+    <div class="amazon-header">
+      <button class="menu-toggle js-menu-toggle" data-tooltip="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <div class="amazon-header-left-section">
+        <a href="/" class="header-link" data-tooltip="Home">
+          <img
+            class="amazon-logo"
+            src="images/kenya-furniture-logo.png"
+            alt="Kenya Fashion Hub"
+          />
+        </a>
+      </div>
+
+      <div class="amazon-header-middle-section">
+        <input
+          class="search-bar js-search-bar"
+          type="text"
+          placeholder="Search for Clothing..."
+        />
+
+        <button class="search-button js-search-button" data-tooltip="Search">
+          <i class="fas fa-search"></i>
+        </button>
+
+        <div class="suggestions-dropdown js-suggestions-dropdown">
+          <!-- Suggestions will be dynamically generated here -->
+        </div>
+      </div>
+
+      <div class="amazon-header-right-section">
+        <button
+          class="auth-button js-auth-button header-link"
+          data-tooltip="Login/Logout"
+        ></button>
+
+        <a
+          class="cart-link header-link"
+          href="/checkout.html"
+          data-tooltip="Cart"
+        >
+          <img class="cart-icon" src="images/icons/cart-icon.png" alt="Cart" />
+          <div class="cart-quantity js-cart-quantity"></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="page-title">Your Orders</div>
+
+      <div class="orders-grid"></div>
+    </div>
+
+    <script type="module" src="/scripts/orders.js"></script>
+  </body>
+</html>
