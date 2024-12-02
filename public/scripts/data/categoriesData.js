@@ -1,22 +1,23 @@
 export const categories = [
   {
-    slug: "jackets",
-    name: "Jackets",
-    image: "/images/categories/jackets.jpeg",
+    slug: "drinks",
+    name: "Nutritional Drinks",
+    image: "/images/categories/drinks.jpg",
   },
   {
-    slug: "shoes",
-    name: "Shoes",
-    image: "/images/categories/shoes.jpeg",
+    slug: "skin-care",
+    name: "Skin Care",
+    image: "/images/categories/skin-care.jpg",
   },
   {
-    slug: "bags",
-    name: "Bags",
-    image: "/images/categories/bags.jpeg",
+    slug: "nutrition-supplement",
+    name: "Nutritional Supplements",
+    image: "/images/categories/nutrition-supplements.jpg",
   },
+
   {
-    slug: "accessories",
-    name: "Accessories",
-    image: "/images/categories/accessories.jpeg",
+    slug: "personal-care",
+    name: "Personal Care",
+    image: "/images/categories/personal-care.jpg",
   },
 ];
