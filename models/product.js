@@ -16,6 +16,7 @@ const productSchema = new mongoose.Schema({
   sizeChartLink: { type: String }, // Optional for clothing type
   keywords: Array,
   categorySlug: { type: String, required: true }, // <--- Add this field to handle category slugs
+  isOnOffer: { type: Boolean, default: false },
 });
 
 // products model - add text index for search fields
@@ -42,6 +43,7 @@ function validateProduct(product) {
     }),
     keywords: Joi.array().items(Joi.string()).optional(), // Allow keywords as an optional array of strings
     categorySlug: Joi.string().required(), // <--- Add validation for categorySlug
+    isOnOffer: Joi.boolean().default(false).optional(),
   });
 
   return schema.validate(product);

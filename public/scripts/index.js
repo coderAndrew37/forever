@@ -1,5 +1,6 @@
 import { addToCart, updateCartQuantity } from "../data/cart.js";
 import { loadProducts } from "../data/products.js";
+import { Product } from "../data/products.js";
 import {
   renderProducts,
   renderPagination,
@@ -35,7 +36,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderCategories(categories);
   renderFAQs(faqs);
   renderTestimonials(testimonials);
-  renderSpecialOffers(specialOffers);
+  renderSpecialOffers(specialOffers, Product);
+  // Render special offers using the new API
+  const offersApiEndpoint = "/api/offers";
+  renderSpecialOffers(offersApiEndpoint, ".special-offers-section");
 });
 
 // Fetch and display products
@@ -103,32 +107,4 @@ searchBar.addEventListener("input", () => {
   } else {
     suggestionsDropdown.style.display = "none";
   }
-});
-
-const packs = [
-  {
-    slug: "c9-pack",
-    name: "C9 Pack",
-    image: "/images/packs/c9-pack.jpg",
-    description:
-      "The C9 Pack is designed to kickstart your journey to a healthier you by cleansing and rejuvenating your body.",
-  },
-  {
-    slug: "sonya-pack",
-    name: "Sonya Pack",
-    image: "/images/packs/sonya-pack.jpg",
-    description:
-      "A revolutionary skincare system designed to moisturize, cleanse, and provide radiant-looking skin.",
-  },
-  {
-    slug: "infinite-pack",
-    name: "Infinite Pack",
-    image: "/images/packs/infinite-pack.jpg",
-    description:
-      "Infinite by Forever Pack is an advanced skincare system to combat aging and keep your skin healthy.",
-  },
-];
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderPacks(packs, ".packs-section .grid");
 });

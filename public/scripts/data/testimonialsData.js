@@ -1,14 +1,14 @@
 export const testimonials = [
   {
-    text: "The leather jacket I bought was worth every penny. Great quality and amazing design!",
-    name: "Amina K.",
+    text: "Forever Living's Aloe Vera Gel has been a game-changer for my digestion and overall energy levels.",
+    name: "Naomi L.",
   },
   {
-    text: "Prompt delivery and excellent customer service. Highly recommended.",
-    name: "Joseph M.",
+    text: "I love the skincare products! The Aloe Vera Gelly keeps my skin hydrated and glowing.",
+    name: "Pauline J.",
   },
   {
-    text: "Best place to buy leather accessories in Nairobi. Loved the custom options.",
-    name: "Grace W.",
+    text: "Great customer service and timely delivery. The Forever Therm supplement has really helped with my fitness journey.",
+    name: "Michael O.",
   },
 ];

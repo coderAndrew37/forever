@@ -208,23 +208,57 @@ export function renderTestimonials(testimonials) {
   `;
 }
 
-export function renderSpecialOffers(offers) {
-  const offersSection = document.querySelector(".special-offers-section");
+export async function renderSpecialOffers(apiEndpoint, containerSelector) {
+  const offersSection = document.querySelector(containerSelector);
   if (!offersSection) return;
 
-  offersSection.innerHTML = `
-    <h2>Exclusive Deals</h2>
-    <div class="offers-grid">
-      ${offers
-        .map(
-          (offer) => `
-          <div class="offer-item">
-            <img src="${offer.image}" alt="${offer.text}" />
-            <p>${offer.text}</p>
-          </div>
-        `
-        )
-        .join("")}
-    </div>
-  `;
+  try {
+    // Fetch special offers from the API
+    const response = await fetch(apiEndpoint);
+    if (!response.ok) throw new Error("Failed to fetch special offers");
+
+    const offers = await response.json();
+
+    // Render the offers
+    offersSection.innerHTML = `
+      <h2 class="text-3xl font-bold text-gray-700 text-center mb-12">
+        <i class="fas fa-fire text-red-500"></i> Exclusive Deals
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        ${offers
+          .map(
+            (offer) => `
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+              <img
+                src="${offer.product.image}"
+                alt="${offer.product.name}"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-4">
+                <h3 class="text-lg font-bold text-gray-700">${offer.product.name}</h3>
+                <p class="text-red-500 font-bold text-xl mt-4">
+                  Ksh ${offer.price}
+                  <span class="line-through text-gray-400">${offer.originalPrice}</span>
+                </p>
+                <button
+                  class="w-full bg-yellow-500 text-white py-2 mt-4 rounded-lg shadow hover:bg-yellow-600 transition add-to-cart-button button-primary js-add-to-cart"
+                  data-product-id="${offer.product.id}"
+                >
+                  <i class="fas fa-cart-plus"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          `
+          )
+          .join("")}
+      </div>
+    `;
+
+    // Reinitialize Add to Cart listeners for the new buttons
+    initAddToCartListeners();
+  } catch (error) {
+    console.error("Error rendering special offers:", error);
+    offersSection.innerHTML =
+      "<p>Error loading special offers. Please try again later.</p>";
+  }
 }

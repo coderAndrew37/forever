@@ -2,16 +2,16 @@ export const faqs = [
   {
     question: "What are your delivery options?",
     answer:
-      "We offer various delivery options, including standard and express shipping. Orders over KSH 15,000 qualify for free delivery in Nairobi.",
+      "We offer nationwide delivery across Kenya. Orders over KSH 5,000 qualify for free delivery within Nairobi and its environs.",
   },
   {
-    question: "How do I return a product?",
+    question: "Are your products 100% authentic?",
     answer:
-      "You can return a product within 30 days of delivery. Please ensure the item is in its original condition and packaging.",
+      "Yes, all our products are sourced directly from Forever Living, ensuring authenticity and premium quality.",
   },
   {
-    question: "Do you offer customization services?",
+    question: "Can I get personalized product recommendations?",
     answer:
-      "Yes, we provide customization options for certain products. Contact our support team for more details.",
+      "Absolutely! Contact our support team or visit our consultation page to get personalized recommendations based on your health and wellness goals.",
   },
 ];
