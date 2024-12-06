@@ -8,16 +8,16 @@ module.exports = function () {
     process.exit(1); // Exit if MongoDB URI is not set
   }
 
-  /* Set up options for MongoDB */
+  /* Set up options for MongoDB 
   const mongooseOptions = {
     ssl: true, // Removed for local connection
   };
-
+*/
   mongoose
-    .connect(mongoURI, mongooseOptions)
-    .then(() => logger.info("Connected to MongoDB"))
+    .connect(mongoURI)
+    .then(() => logger.info(`Connected to MongoDB at ${mongoURI}`))
     .catch((err) => {
-      logger.error("Could not connect to MongoDB", err);
+      logger.error(`Could not connect to MongoDB at ${mongoURI}`, err);
       process.exit(1); // Exit on failed connection to prevent app from running without DB
     });
 };

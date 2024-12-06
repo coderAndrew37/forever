@@ -1994,3 +1994,9 @@
 2024-12-06T12:58:27.664Z [INFO]: Connected to MongoDB
 2024-12-06T12:59:14.682Z [INFO]: Server running on port 5000
 2024-12-06T12:59:43.984Z [ERROR]: Could not connect to MongoDB read ECONNRESET
+2024-12-06T13:19:17.664Z [INFO]: Server running on port 5000
+2024-12-06T13:19:17.712Z [INFO]: Connected to MongoDB
+2024-12-06T13:31:49.756Z [INFO]: Server running on port 5000
+2024-12-06T13:31:51.110Z [INFO]: Connected to MongoDB
+2024-12-06T13:32:14.279Z [INFO]: Server running on port 5000
+2024-12-06T13:32:15.900Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
