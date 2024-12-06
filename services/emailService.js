@@ -21,13 +21,13 @@ async function sendOrderConfirmationEmail(to, order) {
               ${order.items
                 .map(
                   (item) =>
-                    `<li>${item.quantity} x ${item.name} - $${(
+                    `<li>${item.quantity} x ${item.name} - Ksh ${(
                       item.priceCents / 100
                     ).toFixed(2)}</li>`
                 )
                 .join("")}
            </ul>
-           <p><strong>Total: $${(order.totalCents / 100).toFixed(
+           <p><strong>Total: Ksh ${(order.totalCents / 100).toFixed(
              2
            )}</strong></p>`,
   };

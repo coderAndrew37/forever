@@ -1,5 +1,5 @@
 import { renderOrderSummary } from "./renderOrderSummary.js";
-import { updateCartQuantity } from "../data/cart.js";
+import { updateCartQuantity, clearCart } from "../data/cart.js"; // Import clearCart
 
 let cartItems = []; // Initialize cartItems as an empty array
 let totalCents = 0; // Initialize totalCents
@@ -159,9 +159,10 @@ async function handleOrderSubmission(e) {
     }
 
     // Clear the cart after order placement
-    cartItems = [];
+    await clearCart(); // Clear cart via API
+    cartItems = []; // Clear local cartItems array
     await renderOrderSummary(cartItems);
-    updateCartQuantity();
+    updateCartQuantity(); // Update UI cart quantity
 
     // Show SweetAlert success message and redirect to orders page
     Swal.fire({
