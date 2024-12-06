@@ -1,4 +1,4 @@
 const isProduction = window.location.hostname !== "localhost";
 export const baseUrl = isProduction
-  ? "https://clothing-biz.onrender.com"
+  ? "https://forever-svro.onrender.com/"
   : "http://localhost:5000";

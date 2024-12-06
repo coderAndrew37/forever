@@ -1990,3 +1990,7 @@
 2024-12-03T19:50:10.333Z [INFO]: Connected to MongoDB
 2024-12-06T12:50:56.573Z [INFO]: Server running on port 5000
 2024-12-06T12:50:56.665Z [INFO]: Connected to MongoDB
+2024-12-06T12:58:27.601Z [INFO]: Server running on port 5000
+2024-12-06T12:58:27.664Z [INFO]: Connected to MongoDB
+2024-12-06T12:59:14.682Z [INFO]: Server running on port 5000
+2024-12-06T12:59:43.984Z [ERROR]: Could not connect to MongoDB read ECONNRESET
