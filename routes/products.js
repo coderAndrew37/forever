@@ -19,7 +19,7 @@ router.get("/:id", async (req, res) => {
 
 router.get("/", async (req, res) => {
   const page = parseInt(req.query.page, 10) || 1; // Default to page 1
-  const limit = parseInt(req.query.limit, 10) || 15; // Default to 15 items per page
+  const limit = parseInt(req.query.limit, 10) || 16; // Default to 15 items per page
   const categorySlug = req.query.category; // Get the `category` parameter from the query string
 
   try {

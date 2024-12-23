@@ -1,4 +1,6 @@
-export function formatCurrency(priceCents){
-  return(priceCents/100).toFixed(2);
-
-};
+export function formatCurrency(priceCents) {
+  return `KSH ${(priceCents / 100).toLocaleString("en-KE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+}

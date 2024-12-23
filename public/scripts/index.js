@@ -1,6 +1,6 @@
 import { addToCart, updateCartQuantity } from "../data/cart.js";
-import { loadProducts } from "../data/products.js";
-import { Product } from "../data/products.js";
+import { loadProducts } from "./utils/renderUtils.js";
+
 import {
   renderProducts,
   renderPagination,
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderCategories(categories);
   renderFAQs(faqs);
   renderTestimonials(testimonials);
-  renderSpecialOffers(specialOffers, Product);
+  renderSpecialOffers(specialOffers);
   // Render special offers using the new API
   const offersApiEndpoint = "/api/offers";
   renderSpecialOffers(offersApiEndpoint, ".special-offers-section");
@@ -48,23 +48,26 @@ async function fetchAndDisplayProducts(page = 1, authenticated = false) {
     const { products, totalPages: fetchedTotalPages } = await loadProducts(
       page
     );
+
+    if (!products || products.length === 0) {
+      console.log("No products available for homepage.");
+      document.querySelector(".js-products-grid").innerHTML =
+        "<p>No products found.</p>";
+      return;
+    }
+
+    renderProducts(products, ".js-products-grid", authenticated);
+
     totalPages = fetchedTotalPages;
     currentPage = page;
 
-    if (products.length > 0) {
-      renderProducts(products, ".js-products-grid", authenticated); // Pass authentication state
-      renderPagination(currentPage, totalPages, ".js-pagination", (page) =>
-        fetchAndDisplayProducts(page, authenticated)
-      );
+    renderPagination(currentPage, totalPages, ".js-pagination", (page) =>
+      fetchAndDisplayProducts(page, authenticated)
+    );
 
-      // Reinitialize listeners to avoid duplication
-      initAddToCartListeners();
-    } else {
-      document.querySelector(".js-products-grid").innerHTML =
-        "<p>No products found.</p>";
-    }
+    initAddToCartListeners();
   } catch (error) {
-    console.error("Error loading products:", error);
+    console.error("Error loading products on homepage:", error);
     document.querySelector(".js-products-grid").innerHTML =
       "<p>Error loading products. Please try again later.</p>";
   }

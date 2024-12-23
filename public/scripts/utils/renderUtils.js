@@ -1,55 +1,39 @@
-import { formatCurrency } from "./money.js";
+import { baseUrl as baseURL } from "../constants.js";
 import { initAddToCartListeners } from "./cartUtils.js";
+import { formatCurrency } from "./money.js";
 
-//rendering packs
-export function renderPacks(packs, containerSelector) {
-  const packsGrid = document.querySelector(containerSelector);
-  if (!packsGrid) return;
+// Fetch products from the API
+export async function loadProducts(page = 1) {
+  const apiUrl = `${baseURL}/api/products?page=${page}`;
 
-  packsGrid.innerHTML = packs
-    .slice(0, 3) // Show only three packs
-    .map(
-      (pack) => `
-      <div class="pack-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-        <img src="${pack.image}" alt="${pack.name}" class="w-full h-40 object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-semibold text-gray-800">${pack.name}</h3>
-          <p class="text-gray-600 text-sm mt-2 line-clamp-3">${pack.description}</p>
-          <div class="mt-4">
-            <a
-              href="/pack.html?category=${pack.slug}"
-              class="text-blue-500 font-medium hover:underline"
-            >
-              Learn More
-            </a>
-          </div>
-        </div>
-      </div>
-    `
-    )
-    .join("");
-}
+  try {
+    const response = await fetch(apiUrl, {
+      method: "GET",
+      credentials: "include",
+    });
 
-export function renderProducts(products, containerSelector) {
-  const productsGrid = document.querySelector(containerSelector);
-  if (!productsGrid) return;
+    if (!response.ok) {
+      throw new Error(`Failed to fetch products: ${response.statusText}`);
+    }
 
-  if (products.length === 0) {
-    productsGrid.innerHTML = `
-      <p class="text-center text-gray-600">No results found.</p>
-    `;
-    return;
+    const data = await response.json();
+    data.products = data.products.map((product) => ({
+      ...product,
+      id: product._id, // Ensure `id` is mapped for consistency
+    }));
+
+    return {
+      products: data.products,
+      totalPages: data.totalPages || 1,
+      currentPage: data.currentPage || 1,
+    };
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
   }
-
-  const productsHTML = products
-    .map((product) => generateProductHTML(product))
-    .join("");
-  productsGrid.innerHTML = productsHTML;
-
-  // Initialize Add to Cart listeners after rendering
-  initAddToCartListeners();
 }
 
+// Generate product HTML
 export function generateProductHTML(product) {
   return `
     <div class="product-container border border-gray-200 rounded-lg p-5 flex flex-col shadow-sm hover:shadow-lg">
@@ -78,16 +62,6 @@ export function generateProductHTML(product) {
       <div class="product-price text-xl font-bold text-gray-800 mb-4">
         Ksh ${formatCurrency(product.priceCents)}
       </div>
-      <div class="product-quantity-container mb-4">
-        <select
-          class="w-full border border-gray-300 rounded-md text-sm p-2 focus:ring focus:ring-primary"
-        >
-          ${Array.from(
-            { length: 10 },
-            (_, i) => `<option value="${i + 1}">${i + 1}</option>`
-          ).join("")}
-        </select>
-      </div>
       <div class="product-spacer flex-grow"></div>
       <a
         href="/product-details.html?id=${product.id}"
@@ -102,6 +76,60 @@ export function generateProductHTML(product) {
       </a>
     </div>
   `;
+}
+
+// Render products into a container
+export function renderProducts(products, containerSelector) {
+  const productsGrid = document.querySelector(containerSelector);
+  if (!productsGrid) return;
+
+  if (products.length === 0) {
+    productsGrid.innerHTML = `
+      <p class="text-center text-gray-600">No results found.</p>
+    `;
+    return;
+  }
+
+  productsGrid.className = `
+    grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6
+  `; // Responsive grid classes
+
+  const productsHTML = products
+    .map((product) => generateProductHTML(product))
+    .join("");
+  productsGrid.innerHTML = productsHTML;
+
+  // Initialize Add to Cart listeners after rendering
+  initAddToCartListeners();
+}
+
+//rendering packs
+export function renderPacks(packs, containerSelector) {
+  const packsGrid = document.querySelector(containerSelector);
+  if (!packsGrid) return;
+
+  packsGrid.innerHTML = packs
+    .slice(0, 3) // Show only three packs
+    .map(
+      (pack) => `
+      <div class="pack-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+        <img src="${pack.image}" alt="${pack.name}" class="w-full h-40 object-cover">
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-gray-800">${pack.name}</h3>
+          <p class="text-gray-600 text-sm mt-2 line-clamp-3">${pack.description}</p>
+          <div class="mt-4">
+            <a
+              href="/pack.html?category=${pack.slug}"
+              class="text-blue-500 font-medium hover:underline"
+            >
+              Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    `
+    )
+    .join("");
 }
 
 export function renderPagination(

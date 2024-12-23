@@ -76,15 +76,23 @@ function renderProductDetails(product) {
           <div class="text-green-600 font-bold text-2xl mb-4">
             KSH ${(product.priceCents / 100).toLocaleString("en-KE")}
           </div>
-          <button 
-            class="button-primary js-add-to-cart add-to-cart-button bg-primary text-white px-6 py-3 rounded-lg hover:bg-yellow-600"
-            data-product-id="${product.id}"
+          <div class="mb-4">
+            <label for="quantity" class="block text-gray-600 mb-2">Quantity</label>
+            <select
+              id="quantity"
+              class="w-full border border-gray-300 rounded-md text-sm p-2 focus:ring focus:ring-primary"
+            >
+              ${Array.from(
+                { length: 10 },
+                (_, i) => `<option value="${i + 1}">${i + 1}</option>`
+              ).join("")}
+            </select>
+          </div>
+          <button
+            class="button-primary js-add-to-cart add-to-cart-button w-full bg-yellow-500 text-white py-3 rounded-lg hover:bg-yellow-600 transition"
           >
             Add to Cart
           </button>
-          <div class="added-to-cart text-green-600 mt-2" style="opacity: 0;">
-            <i class="fas fa-check"></i> Added to cart
-          </div>
         </div>
       </div>
     </div>
