@@ -109,26 +109,32 @@
       <!-- Hero Section -->
 
       <!-- Hero Section -->
-      <section class="hero-section">
-        <div class="hero-container">
-          <!-- Left Column: Centered Text Content with Icons -->
-          <div class="hero-text">
-            <h1>Transform Your Health with Forever Living Essentials</h1>
-            <p>
+      <section class="hero-section bg-dark text-white py-10">
+        <div
+          class="hero-container max-w-6xl mx-auto flex items-center gap-6 flex-col md:flex-row"
+        >
+          <div
+            class="hero-text flex-1 flex flex-col justify-center items-start max-w-lg"
+          >
+            <h1 class="text-primary text-4xl font-bold leading-tight mb-4">
+              Transform Your Health with Forever Living Essentials
+            </h1>
+            <p class="text-lightGray text-lg leading-relaxed mb-4">
               Explore premium health, skincare, and nutritional products that
               elevate your lifestyle and well-being.
             </p>
-            <a href="#categories" class="button-primary hero-button"
-              >Explore Our Collection</a
+            <a
+              href="#categories"
+              class="hero-button bg-primary text-dark px-6 py-3 rounded-full text-lg font-bold hover:bg-accent"
             >
+              Explore Our Collection
+            </a>
           </div>
-
-          <!-- Right Column: Animated Content -->
-          <div class="hero-animation">
+          <div class="hero-animation flex-1">
             <img
               src="/images/products/forever-hero.jpg"
               alt="Forever Living Products Showcase"
-              class="animated-image"
+              class="rounded-lg max-w-full"
             />
           </div>
         </div>
@@ -180,7 +186,24 @@
       <div class="special-offers-section"></div>
 
       <!-- Customer Testimonials Section -->
-      <div class="testimonials-section"></div>
+      <div class="testimonials-section py-16 px-5 bg-gray-100 bg-opacity-95">
+        <h2 class="text-center text-3xl font-bold text-gray-800 mb-10">
+          What Our Customers Say
+        </h2>
+        <div
+          class="testimonials-grid grid gap-6 text-center md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1"
+        >
+          <!-- Dynamic content will be rendered here -->
+        </div>
+        <div class="text-center mt-8">
+          <button
+            id="submitTestimonialBtn"
+            class="px-6 py-3 text-white font-bold rounded-lg shadow-md hover:bg-yellow-600 transition"
+          >
+            Submit Your Testimonial
+          </button>
+        </div>
+      </div>
 
       <div class="faq-section"></div>
 
@@ -336,21 +359,14 @@
     </button>
 
     <!-- Footer Section -->
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-logo">
-          <img src="/images/logo.jpg" alt="Forever Living Logo" />
-        </div>
-        <div class="footer-links">
+    <footer class="footer bg-gray-900 text-white py-8">
+      <div class="footer-content flex flex-col items-center space-y-4">
+        <img src="/images/logo.jpg" alt="Forever Living Logo" class="w-16" />
+        <div class="footer-links flex space-x-4">
           <a href="#">Home</a>
           <a href="#">About Us</a>
           <a href="#">Contact</a>
           <a href="#">Privacy Policy</a>
-        </div>
-        <div class="social-media-links">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
         <p>&copy; 2024 Forever Living Products Kenya. All rights reserved.</p>
       </div>

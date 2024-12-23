@@ -72,7 +72,7 @@ function renderProductDetails(product) {
           <div class="text-green-600 font-bold text-2xl mb-4">
             KSH ${(product.priceCents / 100).toLocaleString("en-KE")}
           </div>
-          <button class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">
+          <button class="button-primary js-add-to-cart">
             Add to Cart
           </button>
         </div>

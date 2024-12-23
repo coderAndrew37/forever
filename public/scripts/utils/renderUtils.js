@@ -194,20 +194,51 @@ export function renderTestimonials(testimonials) {
   if (!testimonialsSection) return;
 
   testimonialsSection.innerHTML = `
-    <h2>What Our Customers Say</h2>
-    <div class="testimonials-grid">
+    <h2 class="text-center text-3xl font-bold text-gray-800 mb-10">
+      What Our Customers Say
+    </h2>
+    <div class="testimonials-grid grid gap-6 text-center md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1">
       ${testimonials
         .map(
           (testimonial) => `
-          <div class="testimonial-item">
-            <p>"${testimonial.text}"</p>
-            <span>- ${testimonial.name}</span>
+          <div
+            class="testimonial-item bg-white p-5 rounded-lg shadow-md opacity-0 transform translate-y-10 transition-all duration-500"
+          >
+            <p class="text-gray-600 italic mb-4">"${testimonial.text}"</p>
+            <div class="flex justify-center mb-2">
+              ${Array.from({ length: 5 })
+                .map((_, i) => {
+                  return i < testimonial.rating
+                    ? `<i class="fas fa-star text-yellow-500"></i>`
+                    : `<i class="far fa-star text-gray-300"></i>`;
+                })
+                .join("")}
+            </div>
+            <span class="block text-gray-800 font-semibold text-sm">
+              - ${testimonial.name}
+            </span>
           </div>
         `
         )
         .join("")}
     </div>
+    <div class="text-center mt-8">
+      <button
+        id="submitTestimonialBtn"
+        class="px-6 py-3 bg-primary text-white font-bold rounded-lg shadow-md hover:bg-yellow-600 transition"
+      >
+        Submit Your Testimonial
+      </button>
+    </div>
   `;
+
+  // Add fade-in effect
+  const testimonialItems = document.querySelectorAll(".testimonial-item");
+  testimonialItems.forEach((item, index) => {
+    setTimeout(() => {
+      item.classList.remove("opacity-0", "translate-y-10");
+    }, index * 200); // Staggered fade-in
+  });
 }
 
 export async function renderSpecialOffers(apiEndpoint, containerSelector) {

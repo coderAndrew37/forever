@@ -248,10 +248,9 @@ h2 {
   padding: 60px 20px;
   background-color: #f0f0f0;
   background: linear-gradient(
-      rgba(240, 240, 240, 0.95),
-      rgba(240, 240, 240, 0.95)
-    ),
-    url("/images/products/king-bed.jpeg") center/cover no-repeat;
+    rgba(240, 240, 240, 0.95),
+    rgba(240, 240, 240, 0.95)
+  );
 }
 
 .testimonials-grid {
