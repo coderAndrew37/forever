@@ -35,7 +35,9 @@ export function renderProducts(products, containerSelector) {
   if (!productsGrid) return;
 
   if (products.length === 0) {
-    productsGrid.innerHTML = "<p>No results found.</p>";
+    productsGrid.innerHTML = `
+      <p class="text-center text-gray-600">No results found.</p>
+    `;
     return;
   }
 
@@ -50,42 +52,53 @@ export function renderProducts(products, containerSelector) {
 
 export function generateProductHTML(product) {
   return `
-    <div class="product-container">
-      <div class="product-image-container">
-        <img class="product-image" src="${product.image}" alt="${product.name}">
+    <div class="product-container border border-gray-200 rounded-lg p-5 flex flex-col shadow-sm hover:shadow-lg">
+      <div class="product-image-container flex justify-center items-center h-48 mb-5">
+        <img
+          class="product-image object-cover max-w-full max-h-full"
+          src="${product.image}"
+          alt="${product.name}"
+        />
       </div>
-      <div class="product-name limit-text-to-2-lines">
+      <div class="product-name text-lg font-medium text-gray-800 mb-2 truncate">
         ${product.name}
       </div>
-      <div class="product-rating-container">
-        <img class="product-rating-stars" src="images/ratings/rating-${
-          product.rating.stars * 10
-        }.png" alt="${product.rating.stars} stars">
-        <div class="product-rating-count link-primary">
-          ${product.rating.count}
-        </div>
+      <div class="product-rating-container flex items-center mb-4">
+        <img
+          class="product-rating-stars w-20"
+          src="images/ratings/rating-${product.rating.stars * 10}.png"
+          alt="${product.rating.stars} stars"
+        />
+        <span
+          class="product-rating-count text-blue-500 text-sm ml-2 cursor-pointer"
+        >
+          ${product.rating.count} reviews
+        </span>
       </div>
-      <div class="product-price">
+      <div class="product-price text-xl font-bold text-gray-800 mb-4">
         Ksh ${formatCurrency(product.priceCents)}
       </div>
-      <div class="product-quantity-container">
-        <select class="js-quantity-selector-${product.id}">
+      <div class="product-quantity-container mb-4">
+        <select
+          class="w-full border border-gray-300 rounded-md text-sm p-2 focus:ring focus:ring-primary"
+        >
           ${Array.from(
             { length: 10 },
             (_, i) => `<option value="${i + 1}">${i + 1}</option>`
           ).join("")}
         </select>
       </div>
-      <div class="product-spacer"></div>
-      <div class="added-to-cart" style="opacity:0;">
-        <img src="images/icons/checkmark.png" alt="Added to cart"> Added to cart
-      </div>
-      <a href="/product-details.html?id=${product.id}">
-      <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${
-        product.id
-      }">
-        Learn More
-      </button>
+      <div class="product-spacer flex-grow"></div>
+      <a
+        href="/product-details.html?id=${product.id}"
+        class="block mt-4"
+      >
+        <button
+          class="add-to-cart-button button-primary w-full bg-primary text-white py-2 rounded-full hover:bg-yellow-600 transition"
+          data-product-id="${product.id}"
+        >
+          Learn More
+        </button>
       </a>
     </div>
   `;

@@ -1,4 +1,7 @@
 import { baseUrl } from "./constants.js";
+import { addToCart, updateCartQuantity } from "../data/cart.js";
+import { isAuthenticated } from "./utils/cartUtils.js";
+import "./authButton.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
@@ -17,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const product = await response.json();
     renderProductDetails(product);
+    initAddToCartListener(productId); // Add cart functionality
   } catch (error) {
     console.error(error);
     document.getElementById("product-details-container").innerHTML =
@@ -72,11 +76,57 @@ function renderProductDetails(product) {
           <div class="text-green-600 font-bold text-2xl mb-4">
             KSH ${(product.priceCents / 100).toLocaleString("en-KE")}
           </div>
-          <button class="button-primary js-add-to-cart">
+          <button 
+            class="button-primary js-add-to-cart add-to-cart-button bg-primary text-white px-6 py-3 rounded-lg hover:bg-yellow-600"
+            data-product-id="${product.id}"
+          >
             Add to Cart
           </button>
+          <div class="added-to-cart text-green-600 mt-2" style="opacity: 0;">
+            <i class="fas fa-check"></i> Added to cart
+          </div>
         </div>
       </div>
     </div>
   `;
+}
+
+function initAddToCartListener(productId) {
+  const addToCartButton = document.querySelector(".js-add-to-cart");
+
+  addToCartButton.addEventListener("click", async () => {
+    const isUserAuthenticated = await isAuthenticated();
+
+    if (!isUserAuthenticated) {
+      const proceedToLogin = confirm(
+        "You must log in to add items to your cart. Would you like to log in now?"
+      );
+      if (proceedToLogin) {
+        window.location.href = "/login.html";
+      } else {
+        alert("You cannot add items to the cart without logging in.");
+      }
+      return;
+    }
+
+    try {
+      addToCartButton.disabled = true;
+      await addToCart(productId, 1);
+      updateCartQuantity();
+
+      // Show "Added to Cart" message
+      const addedMessage = document.querySelector(".added-to-cart");
+      if (addedMessage) {
+        addedMessage.style.opacity = "1";
+        setTimeout(() => {
+          addedMessage.style.opacity = "0";
+        }, 2000);
+      }
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      alert("Failed to add item to cart.");
+    } finally {
+      addToCartButton.disabled = false;
+    }
+  });
 }
