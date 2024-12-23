@@ -160,28 +160,42 @@ export function renderFAQs(faqs) {
   if (!faqSection) return;
 
   faqSection.innerHTML = `
-    <h2>Frequently Asked Questions</h2>
-    ${faqs
-      .map(
-        (faq) => `
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <i class="fas fa-chevron-right"></i>
-            <span class="question-text">${faq.question}</span>
-          </button>
-          <div class="faq-answer">
-            <p>${faq.answer}</p>
+    <h2 class="text-center text-3xl font-bold text-gray-800 mb-8">
+      Frequently Asked Questions
+    </h2>
+    <div class="faq-items space-y-4">
+      ${faqs
+        .map(
+          (faq) => `
+          <div class="faq-item">
+            <button
+              class="faq-question flex items-center w-full bg-gray-100 p-4 rounded-md text-left text-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+              aria-expanded="false"
+            >
+              <i class="fas fa-chevron-right transition-transform text-gray-500"></i>
+              <span class="question-text flex-grow ml-4 text-gray-800">
+                ${faq.question}
+              </span>
+            </button>
+            <div
+              class="faq-answer overflow-hidden transition-all duration-300 max-h-0 px-4"
+            >
+              <p class="text-gray-600 mt-4">${faq.answer}</p>
+            </div>
           </div>
-        </div>
-      `
-      )
-      .join("")}
+        `
+        )
+        .join("")}
+    </div>
   `;
 
   document.querySelectorAll(".faq-question").forEach((button) => {
     button.addEventListener("click", () => {
       const expanded = button.getAttribute("aria-expanded") === "true";
       button.setAttribute("aria-expanded", !expanded);
+
+      const icon = button.querySelector("i");
+      icon.classList.toggle("rotate-90", !expanded);
 
       const answer = button.nextElementSibling;
       answer.style.maxHeight = expanded ? 0 : `${answer.scrollHeight}px`;
