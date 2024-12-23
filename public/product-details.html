@@ -3,75 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Details - Kenya Clothing Hub</title>
-    <link rel="stylesheet" href="/styles/shared/general.css" />
-    <link rel="stylesheet" href="/styles/pages/product-details.css" />
+    <title>Product Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
-  <body>
-    <!-- Header -->
-    <header class="amazon-header">
-      <a href="/" class="header-link">
-        <img
-          src="/images/kenya-furniture-logo.png"
-          alt="Kenya Clothing Hub"
-          class="amazon-logo"
-        />
-      </a>
+  <body class="bg-gray-100 text-gray-800 font-sans">
+    <header class="bg-green-600 text-white py-4">
+      <div class="container mx-auto px-4">
+        <h1 class="text-xl font-bold">Forever Living Products</h1>
+      </div>
     </header>
 
-    <!-- Product Details Section -->
-    <main class="product-details-page">
-      <div class="product-container">
-        <!-- Product Image -->
-        <div class="product-image-container">
-          <img
-            src=""
-            alt="Product Image"
-            class="product-image js-product-image"
-          />
-        </div>
+    <main
+      id="product-details-container"
+      class="container mx-auto px-4 py-8"
+    ></main>
 
-        <!-- Product Info -->
-        <div class="product-info">
-          <h1 class="product-name js-product-name"></h1>
-          <div class="product-price js-product-price"></div>
-          <p class="product-description js-product-description"></p>
-
-          <!-- Size Selector -->
-          <div class="product-size">
-            <label for="product-size">Size:</label>
-            <select id="product-size" class="js-size-selector"></select>
-          </div>
-
-          <!-- Quantity Selector -->
-          <div class="product-quantity">
-            <label for="product-quantity">Quantity:</label>
-            <input
-              id="product-quantity"
-              type="number"
-              class="js-quantity-selector"
-              min="1"
-              value="1"
-            />
-          </div>
-
-          <!-- Add to Cart Button -->
-          <button class="button-primary js-add-to-cart">Add to Cart</button>
-        </div>
-      </div>
-
-      <!-- Added to Cart Message -->
-      <div class="added-to-cart-notification">
-        Product added to cart! Redirecting to checkout...
-      </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <p>&copy; 2024 Kenya Clothing Hub. All rights reserved.</p>
-    </footer>
-
-    <!-- JavaScript -->
-    <script type="module" src="/scripts/product-details.js"></script>
+    <script type="module" src="/scripts/productDetails.js"></script>
   </body>
 </html>

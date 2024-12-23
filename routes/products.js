@@ -3,6 +3,20 @@ const { Product, validateProduct } = require("../models/product");
 const router = express.Router();
 const mongoose = require("mongoose");
 
+// Get product by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ error: "Product not found." });
+    res.json(product);
+  } catch (error) {
+    console.error("Error fetching product details:", error);
+    res.status(500).json({ error: "Failed to fetch product details." });
+  }
+});
+
+// Get all products
+
 router.get("/", async (req, res) => {
   const page = parseInt(req.query.page, 10) || 1; // Default to page 1
   const limit = parseInt(req.query.limit, 10) || 15; // Default to 15 items per page

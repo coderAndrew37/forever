@@ -2,6 +2,8 @@ import { loadCategoryProducts } from "./productApi.js";
 import { renderProducts } from "./utils/renderUtils.js";
 import { initAddToCartListeners, isAuthenticated } from "./utils/cartUtils.js";
 import { updateCartQuantity } from "../data/cart.js";
+import "./authButton.js";
+import "./handleSearch.js";
 
 const productsContainerSelector = ".js-products-grid";
 const categoryTitle = document.getElementById("category-title");

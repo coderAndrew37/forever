@@ -80,11 +80,13 @@ export function generateProductHTML(product) {
       <div class="added-to-cart" style="opacity:0;">
         <img src="images/icons/checkmark.png" alt="Added to cart"> Added to cart
       </div>
+      <a href="/product-details.html?id=${product.id}">
       <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${
         product.id
       }">
-        Add to Cart
+        Learn More
       </button>
+      </a>
     </div>
   `;
 }

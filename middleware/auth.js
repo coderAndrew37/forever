@@ -9,7 +9,6 @@ const jwtSecret = process.env.JWT_SECRET || "your_jwt_secret";
  */
 function authMiddleware(req, res, next) {
   const token = req.cookies.access_token;
-  console.log("authMiddleware: Received Token:", token); // Debug log
 
   if (!token) {
     console.log("authMiddleware: Token is missing"); // Debug log
@@ -18,7 +17,6 @@ function authMiddleware(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, jwtSecret);
-    console.log("authMiddleware: Decoded Token:", decoded); // Debug log
     req.user = { userId: decoded.userId };
     next();
   } catch (error) {
