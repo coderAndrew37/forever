@@ -104,32 +104,81 @@ export function renderProducts(products, containerSelector) {
 }
 
 //rendering packs
-export function renderPacks(packs, containerSelector) {
-  const packsGrid = document.querySelector(containerSelector);
-  if (!packsGrid) return;
+export async function renderPacks(containerSelector) {
+  const packsContainer = document.querySelector(containerSelector);
 
-  packsGrid.innerHTML = packs
-    .slice(0, 3) // Show only three packs
-    .map(
-      (pack) => `
-      <div class="pack-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-        <img src="${pack.image}" alt="${pack.name}" class="w-full h-40 object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-semibold text-gray-800">${pack.name}</h3>
-          <p class="text-gray-600 text-sm mt-2 line-clamp-3">${pack.description}</p>
-          <div class="mt-4">
-            <a
-              href="/pack.html?category=${pack.slug}"
-              class="text-blue-500 font-medium hover:underline"
-            >
-              Learn More
-            </a>
-          </div>
+  if (!packsContainer) return;
+
+  try {
+    const response = await fetch("/api/packs"); // Fetch packs from the API
+
+    if (!response.ok) throw new Error("Failed to fetch packs");
+
+    const packs = await response.json();
+
+    // Render packs with name, image, and a clickable link to pack-details
+    packsContainer.innerHTML = packs
+      .map(
+        (pack) => `
+        <div class="pack-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+          <a href="/pack-details.html?slug=${pack.slug}">
+            <img
+              src="${pack.packImage || "/images/default-pack.jpg"}"
+              alt="${pack.name}"
+              class="h-48 w-full object-cover"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-semibold text-gray-800">${pack.name}</h3>
+            </div>
+          </a>
         </div>
-      </div>
-    `
-    )
-    .join("");
+      `
+      )
+      .join(""); // Combine all pack HTML into a single string
+  } catch (error) {
+    console.error("Error rendering packs:", error);
+
+    packsContainer.innerHTML = `
+      <p class="text-center text-gray-600">Failed to load packs. Please try again later.</p>
+    `;
+  }
+}
+
+export async function renderFeaturedPacks(containerSelector) {
+  const packsContainer = document.querySelector(containerSelector);
+
+  if (!packsContainer) return;
+
+  try {
+    const response = await fetch("/api/packs");
+    if (!response.ok) throw new Error("Failed to fetch packs");
+
+    const packs = await response.json();
+
+    packsContainer.innerHTML = packs
+      .map(
+        (pack) => `
+        <div class="pack-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+          <a href="/packs/${pack.slug}">
+            <img
+              src="${pack.productIds[0]?.image || "/images/default-pack.jpg"}"
+              alt="${pack.name}"
+              class="h-48 w-full object-cover"
+            />
+            <div class="p-4">
+              <h3 class="text-lg font-semibold text-gray-800">${pack.name}</h3>
+            </div>
+          </a>
+        </div>
+      `
+      )
+      .join("");
+  } catch (error) {
+    console.error("Error rendering featured packs:", error);
+    packsContainer.innerHTML = `
+      <p class="text-center text-gray-600">Failed to load packs. Please try again later.</p>
+    `;
+  }
 }
 
 export function renderPagination(

@@ -37,6 +37,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderFAQs(faqs);
   renderTestimonials(testimonials);
   renderSpecialOffers(specialOffers);
+  renderPacks(".js-packs-grid");
+
   // Render special offers using the new API
   const offersApiEndpoint = "/api/offers";
   renderSpecialOffers(offersApiEndpoint, ".special-offers-section");

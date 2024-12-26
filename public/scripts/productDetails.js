@@ -38,21 +38,7 @@ function renderProductDetails(product) {
   container.innerHTML = `
     <div class="bg-white shadow-lg rounded-lg p-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Image Section -->
-        <div>
-          <img src="${product.image}" alt="${
-    product.name
-  }" class="w-full rounded-lg mb-4" />
-          <div class="grid grid-cols-2 gap-4">
-            ${product.gallery
-              .slice(0, 2)
-              .map(
-                (image) =>
-                  `<img src="${image}" alt="Gallery Image" class="rounded-lg w-full h-auto" />`
-              )
-              .join("")}
-          </div>
-        </div>
+      
 
         <!-- Product Details Section -->
         <div>
@@ -101,6 +87,22 @@ function renderProductDetails(product) {
           >
             Add to Cart
           </button>
+        </div>
+
+          <!-- Image Section -->
+        <div>
+          <img src="${product.image}" alt="${
+    product.name
+  }" class="w-full rounded-lg mb-4" />
+          <div class="grid grid-cols-2 gap-4">
+            ${product.gallery
+              .slice(0, 2)
+              .map(
+                (image) =>
+                  `<img src="${image}" alt="Gallery Image" class="rounded-lg w-full h-auto" />`
+              )
+              .join("")}
+          </div>
         </div>
       </div>
     </div>
