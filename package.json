@@ -1,11 +1,12 @@
 {
-  "name": "clothing-biz",
+  "name": "forever-living-products",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple serverless website for Forever Living Products.",
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "build:css": "tailwindcss -i ./src/input.css -o ./public/styles/tailwind.css --minify"
   },
   "engines": {
     "node": "18.x"
