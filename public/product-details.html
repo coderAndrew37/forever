@@ -41,38 +41,44 @@
     ></div>
 
     <!-- Header section -->
-    <div class="amazon-header">
-      <button class="menu-toggle js-menu-toggle" data-tooltip="Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-
-      <div class="amazon-header-left-section">
-        <a href="/" class="header-link" data-tooltip="Home">
+    <header
+      class="amazon-header flex justify-between items-center p-4 bg-gray-800 text-white"
+    >
+      <div class="flex items-center space-x-4">
+        <button class="menu-toggle js-menu-toggle">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+        <a href="/" class="header-link flex items-center space-x-2">
           <img
-            class="amazon-logo"
+            class="amazon-logo h-10"
             src="/images/logo.jpg"
             alt="Forever Living"
           />
+          <span class="text-lg font-bold">Forever Living</span>
         </a>
       </div>
-
-      <div class="amazon-header-right-section">
+      <div class="flex items-center space-x-4">
         <button
-          class="auth-button js-auth-button header-link"
-          data-tooltip="Login/Logout"
-        ></button>
-
-        <a
-          class="cart-link header-link"
-          href="/checkout.html"
-          data-tooltip="Cart"
+          class="auth-button js-auth-button bg-blue-500 px-4 py-2 rounded-md"
         >
-          <img class="cart-icon" src="images/icons/cart-icon.png" alt="Cart" />
-          <div class="cart-quantity js-cart-quantity"></div>
+          Login
+        </button>
+        <a href="/checkout.html" class="cart-link relative">
+          <img
+            class="cart-icon h-8"
+            src="images/icons/cart-icon.png"
+            alt="Cart"
+          />
+          <div
+            class="cart-quantity js-cart-quantity absolute top-0 right-0 bg-yellow-500 text-xs text-white rounded-full w-5 h-5 flex items-center justify-center"
+          >
+            0
+          </div>
         </a>
       </div>
-    </div>
+    </header>
 
+    <!-- Main Content -->
     <main
       id="product-details-container"
       class="container mx-auto px-4 py-8"

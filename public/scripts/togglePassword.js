@@ -4,9 +4,9 @@ function togglePassword(inputId) {
 
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
-    toggleButton.innerHTML = "&#128083;"; // Closed eye icon
+    toggleButton.textContent = "Hide";
   } else {
     passwordInput.type = "password";
-    toggleButton.innerHTML = "&#128065;"; // Open eye icon
+    toggleButton.textContent = "Show";
   }
 }

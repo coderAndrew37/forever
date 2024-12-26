@@ -2,8 +2,13 @@ import { baseUrl } from "./constants.js";
 import { addToCart, updateCartQuantity } from "../data/cart.js";
 import { isAuthenticated } from "./utils/cartUtils.js";
 import "./authButton.js";
+import "./sidebar.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+  const authenticated = await isAuthenticated();
+  if (authenticated) {
+    updateCartQuantity();
+  }
   const params = new URLSearchParams(window.location.search);
   const productId = params.get("id");
 
@@ -35,14 +40,15 @@ function renderProductDetails(product) {
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Image Section -->
         <div>
-          <div class="grid grid-cols-2 gap-4">
-            <img src="${product.image}" alt="${
+          <img src="${product.image}" alt="${
     product.name
-  }" class="rounded-lg">
+  }" class="w-full rounded-lg mb-4" />
+          <div class="grid grid-cols-2 gap-4">
             ${product.gallery
+              .slice(0, 2)
               .map(
                 (image) =>
-                  `<img src="${image}" alt="Gallery Image" class="rounded-lg">`
+                  `<img src="${image}" alt="Gallery Image" class="rounded-lg w-full h-auto" />`
               )
               .join("")}
           </div>
@@ -50,9 +56,9 @@ function renderProductDetails(product) {
 
         <!-- Product Details Section -->
         <div>
-          <h2 class="text-2xl font-bold mb-4">${product.name}</h2>
+          <h2 class="text-3xl font-bold mb-4">${product.name}</h2>
           <p class="text-gray-600 mb-4">${product.description}</p>
-          
+
           <!-- Benefits Section -->
           <h3 class="text-xl font-semibold mb-2">Benefits</h3>
           <ul class="list-disc pl-5 mb-4">
@@ -67,20 +73,21 @@ function renderProductDetails(product) {
               )
               .join("")}
           </ul>
-          
+
           <!-- Usage Section -->
           <h3 class="text-xl font-semibold mb-2">Usage</h3>
           <p class="text-gray-600 mb-4">${product.usage}</p>
-          
+
           <!-- Price and Add to Cart -->
-          <div class="text-green-600 font-bold text-2xl mb-4">
+          <div class="text-green-600 font-bold text-3xl mb-4">
             KSH ${(product.priceCents / 100).toLocaleString("en-KE")}
           </div>
+
           <div class="mb-4">
             <label for="quantity" class="block text-gray-600 mb-2">Quantity</label>
             <select
               id="quantity"
-              class="w-full border border-gray-300 rounded-md text-sm p-2 focus:ring focus:ring-primary"
+              class="block w-auto px-2 py-1 border border-gray-300 rounded-md text-sm focus:ring focus:ring-yellow-400 focus:outline-none"
             >
               ${Array.from(
                 { length: 10 },
@@ -88,6 +95,7 @@ function renderProductDetails(product) {
               ).join("")}
             </select>
           </div>
+
           <button
             class="button-primary js-add-to-cart add-to-cart-button w-full bg-yellow-500 text-white py-3 rounded-lg hover:bg-yellow-600 transition"
           >
@@ -103,6 +111,9 @@ function initAddToCartListener(productId) {
   const addToCartButton = document.querySelector(".js-add-to-cart");
 
   addToCartButton.addEventListener("click", async () => {
+    const quantitySelector = document.getElementById("quantity");
+    const quantity = quantitySelector ? parseInt(quantitySelector.value) : 1;
+
     const isUserAuthenticated = await isAuthenticated();
 
     if (!isUserAuthenticated) {
@@ -119,7 +130,7 @@ function initAddToCartListener(productId) {
 
     try {
       addToCartButton.disabled = true;
-      await addToCart(productId, 1);
+      await addToCart(productId, quantity);
       updateCartQuantity();
 
       // Show "Added to Cart" message
