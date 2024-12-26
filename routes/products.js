@@ -3,7 +3,30 @@ const { Product, validateProduct } = require("../models/product");
 const router = express.Router();
 const mongoose = require("mongoose");
 
-// Get product by ID
+// Add endpoint to fetch products by a list of IDs
+router.get("/by-ids", async (req, res) => {
+  const ids = req.query.ids ? req.query.ids.split(",") : [];
+
+  if (ids.length === 0) {
+    return res.status(400).json({ error: "No IDs provided" });
+  }
+
+  const validObjectIds = ids.filter(mongoose.Types.ObjectId.isValid);
+
+  if (validObjectIds.length === 0) {
+    return res.status(400).json({ error: "No valid IDs provided." });
+  }
+
+  try {
+    const products = await Product.find({ _id: { $in: validObjectIds } });
+    res.json(products);
+  } catch (error) {
+    console.error("Error fetching products by IDs:", error);
+    res.status(500).json({ error: "Failed to fetch products." });
+  }
+});
+
+// Get product by ID (this must come after /by-ids)
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -48,46 +71,6 @@ router.get("/", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching products:", error);
-    res.status(500).json({ error: "Failed to fetch products" });
-  }
-});
-
-// Add endpoint to fetch products by a list of IDs
-router.get("/by-ids", async (req, res) => {
-  const ids = req.query.ids ? req.query.ids.split(",") : [];
-
-  // Check if there are no IDs provided
-  if (ids.length === 0) {
-    return res.status(400).json({ error: "No IDs provided" });
-  }
-
-  // Validate and convert to ObjectId format, collecting any invalid IDs
-  const { validObjectIds, invalidIds } = ids.reduce(
-    (acc, id) => {
-      if (mongoose.Types.ObjectId.isValid(id)) {
-        acc.validObjectIds.push(new mongoose.Types.ObjectId(id));
-      } else {
-        acc.invalidIds.push(id);
-      }
-      return acc;
-    },
-    { validObjectIds: [], invalidIds: [] }
-  );
-
-  // If there are invalid IDs, return a 400 error with a message
-  if (invalidIds.length > 0) {
-    return res.status(400).json({
-      error: "Invalid ObjectId format",
-      invalidIds,
-    });
-  }
-
-  try {
-    // Fetch products matching the valid ObjectIds
-    const products = await Product.find({ _id: { $in: validObjectIds } });
-    res.json(products);
-  } catch (error) {
-    console.error("Error fetching products by IDs:", error);
     res.status(500).json({ error: "Failed to fetch products" });
   }
 });

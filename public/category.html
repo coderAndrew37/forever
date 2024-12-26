@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/styles/shared/general.css" />
     <link rel="stylesheet" href="/styles/shared/amazon-header.css" />
     <link rel="stylesheet" href="/styles/pages/amazon.css" />
+
+    <!-- Tailwind css -->
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
     <!-- Header Section -->
@@ -41,8 +44,13 @@
     </div>
 
     <!-- Category Products Section -->
-    <div class="category-products-section">
-      <h2 id="category-title">Category</h2>
+    <div class="category-products-section px-4 py-8 bg-gray-100">
+      <h2
+        id="category-title"
+        class="text-3xl font-bold text-gray-800 text-center mb-8"
+      >
+        Category
+      </h2>
       <div class="products-grid js-products-grid">
         <!-- Products will be dynamically loaded here -->
       </div>
