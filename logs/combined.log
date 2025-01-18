@@ -2413,3 +2413,4 @@
 2024-12-26T12:33:11.798Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever
 2024-12-26T12:35:11.080Z [INFO]: Server running on port 5000
 2024-12-26T12:35:11.169Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever
+2025-01-18T05:44:16.296Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

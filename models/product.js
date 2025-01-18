@@ -17,6 +17,7 @@ const productSchema = new mongoose.Schema({
   rating: { type: ratingSchema, required: true },
   priceCents: { type: Number, required: true, min: 0 },
   description: { type: String, required: true },
+  usage: { type: String, required: true }, // New "usage" field
   benefits: { type: [benefitSchema], required: true },
   gallery: { type: [String], default: [] },
   categorySlug: { type: String, required: true },
@@ -36,6 +37,7 @@ function validateProduct(product) {
     }).required(),
     priceCents: Joi.number().min(0).required(),
     description: Joi.string().required(),
+    usage: Joi.string().required(), // Validation for "usage"
     benefits: Joi.array()
       .items(
         Joi.object({
