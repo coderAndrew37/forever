@@ -3,6 +3,76 @@ const { Product, validateProduct } = require("../models/product");
 const router = express.Router();
 const mongoose = require("mongoose");
 
+// Define specific routes first
+router.get("/suggestions", async (req, res) => {
+  const query = req.query.q;
+  if (!query) {
+    return res.status(400).json({ message: "Query is required" });
+  }
+
+  try {
+    const suggestions = await Product.find({
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+        { keywords: { $regex: query, $options: "i" } },
+      ],
+    })
+      .limit(5) // Limit to 5 suggestions for performance
+      .select("name"); // Only return product name for suggestions
+
+    res.json(suggestions);
+  } catch (error) {
+    console.error("Error fetching suggestions:", error);
+    res.status(500).json({ error: "Failed to fetch suggestions" });
+  }
+});
+
+//add endpoint to search products by name
+router.get("/search", async (req, res) => {
+  const query = req.query.q;
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 10;
+
+  if (!query || query.trim().length === 0) {
+    return res.status(400).json({ error: "Search query is required" });
+  }
+
+  try {
+    console.log("Search query:", query);
+
+    const products = await Product.find({ $text: { $search: query } })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .select("name image rating priceCents");
+    const totalProducts = await Product.countDocuments({
+      $text: { $search: query },
+    });
+
+    const totalPages = Math.ceil(totalProducts / limit);
+
+    const sanitizedProducts = products.map((product) => ({
+      _id: product._id,
+      name: product.name || "Unnamed Product",
+      image: product.image || "images/default-product.png",
+      rating: {
+        stars: product.rating?.stars || 0,
+        count: product.rating?.count || 0,
+      },
+      priceCents: product.priceCents || 0,
+    }));
+
+    res.status(200).json({
+      products: sanitizedProducts,
+      currentPage: page,
+      totalPages,
+      totalProducts,
+    });
+  } catch (error) {
+    console.error("Error during product search:", error);
+    res.status(500).json({ error: "Server error during search" });
+  }
+});
+
 // Add endpoint to fetch products by a list of IDs
 router.get("/by-ids", async (req, res) => {
   const ids = req.query.ids ? req.query.ids.split(",") : [];
@@ -26,7 +96,7 @@ router.get("/by-ids", async (req, res) => {
   }
 });
 
-// Get product by ID (this must come after /by-ids)
+// Dynamic route for fetching a single product by ID
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -75,56 +145,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/search", async (req, res) => {
-  const query = req.query.q;
-  const page = parseInt(req.query.page, 10) || 1;
-  const limit = parseInt(req.query.limit, 10) || 10;
-
-  if (!query) {
-    return res.status(400).json({ message: "Query is required" });
-  }
-
-  try {
-    // Search products with $text indexing
-    const products = await Product.find({ $text: { $search: query } })
-      .skip((page - 1) * limit)
-      .limit(limit)
-      .select("name image rating priceCents") // Include required fields only
-      .exec();
-
-    const totalProducts = await Product.countDocuments({
-      $text: { $search: query },
-    });
-    const totalPages = Math.ceil(totalProducts / limit);
-
-    // Provide default values for any missing fields
-    const sanitizedProducts = products.map((product) => ({
-      _id: product._id,
-      name: product.name || "Unnamed Product",
-      image: product.image || "images/default-product.png",
-      rating: {
-        stars: product.rating?.stars || 0,
-        count: product.rating?.count || 0,
-      },
-      priceCents: product.priceCents || 0,
-    }));
-
-    if (sanitizedProducts.length === 0) {
-      return res.status(404).json({ message: "No products found" });
-    }
-
-    res.json({
-      products: sanitizedProducts,
-      currentPage: page,
-      totalPages,
-      totalProducts,
-    });
-  } catch (error) {
-    console.error("Error during product search:", error);
-    res.status(500).json({ error: "Server error during search" });
-  }
-});
-
 // Add the POST route to create a new product
 router.post("/", async (req, res) => {
   // Validate product data
@@ -140,30 +160,6 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.error("Error adding product:", error);
     res.status(500).json({ message: "Failed to add product" });
-  }
-});
-
-// Add a new route in API for suggestions
-router.get("/suggestions", async (req, res) => {
-  const query = req.query.q;
-  if (!query) {
-    return res.status(400).json({ message: "Query is required" });
-  }
-
-  try {
-    const suggestions = await Product.find({
-      $or: [
-        { name: { $regex: query, $options: "i" } },
-        { keywords: { $regex: query, $options: "i" } },
-      ],
-    })
-      .limit(5) // Limit to 5 suggestions for performance
-      .select("name"); // Only return product name for suggestions
-
-    res.json(suggestions);
-  } catch (error) {
-    console.error("Error fetching suggestions:", error);
-    res.status(500).json({ error: "Failed to fetch suggestions" });
   }
 });
 

@@ -31,7 +31,7 @@
   </head>
   <body>
     <!-- Sidebar -->
-    <div
+    <aside
       class="js-sidebar sidebar sidebar-closed fixed top-0 left-0 h-full w-64 bg-gray-900 text-white z-50 shadow-lg"
     >
       <nav class="p-4 space-y-4">
@@ -48,7 +48,7 @@
         <a href="/about.html" class="block text-lg">About Us</a>
         <a href="/contact.html" class="block text-lg">Contact</a>
       </nav>
-    </div>
+    </aside>
 
     <!-- Overlay -->
     <div
@@ -57,7 +57,7 @@
     ></div>
 
     <!-- Header section -->
-    <div class="amazon-header">
+    <header class="amazon-header">
       <button class="menu-toggle js-menu-toggle" data-tooltip="Menu">
         <i class="fas fa-bars"></i>
       </button>
@@ -103,7 +103,7 @@
           <div class="cart-quantity js-cart-quantity"></div>
         </a>
       </div>
-    </div>
+    </header>
 
     <div class="main-content">
       <!-- Hero Section -->
@@ -166,8 +166,14 @@
         </div>
       </section>
 
-      <!-- Clothing Categories Section -->
+      <!-- Categories Section -->
       <div class="categories-section" id="categories"></div>
+
+      <div
+        class="js-products-grid grid grid-cols-8 gap-6 xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 xs:grid-cols-3 2xs:grid-cols-2"
+      >
+        <!-- Search results will be rendered here -->
+      </div>
 
       <!-- Featured Products Section -->
       <div class="main py-16 bg-gray-50" id="featured-products">
