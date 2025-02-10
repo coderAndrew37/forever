@@ -10,3 +10,5 @@
 2024-12-06T12:59:43.984Z [ERROR]: Could not connect to MongoDB read ECONNRESET
 2024-12-22T16:59:36.564Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 querySrv ECONNREFUSED _mongodb._tcp.cluster0.fbt1k.mongodb.net
 2024-12-22T17:17:20.724Z [ERROR]: Could not connect to MongoDB at mongodb://localhost:27017/forever read ECONNRESET
+2025-02-10T09:15:24.278Z [ERROR]: Not allowed by CORS Not allowed by CORS
+2025-02-10T09:16:46.404Z [ERROR]: Not allowed by CORS Not allowed by CORS
