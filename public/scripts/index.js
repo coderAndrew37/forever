@@ -17,7 +17,6 @@ import { testimonials } from "./data/testimonialsData.js";
 import { specialOffers } from "./data/specialOffersData.js";
 import { isAuthenticated, initAddToCartListeners } from "./utils/cartUtils.js";
 import "./authButton.js";
-import "./utils/navToggle.js";
 
 import "./handleSearch.js";
 import "./sidebar.js";
