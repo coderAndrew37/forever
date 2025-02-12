@@ -207,11 +207,14 @@
       <!-- Special Offers Section -->
       <div class="special-offers-section"></div>
 
-      <!-- Customer Testimonials Section -->
-      <div class="testimonials-section py-16 px-5 bg-gray-100 bg-opacity-95">
-        <h2 class="text-center text-3xl font-bold text-gray-800 mb-10">
+      <section class="testimonials-section py-16 px-5 bg-gray-100">
+        <h2 class="text-center text-4xl font-bold text-gray-800 mb-10">
           What Our Customers Say
         </h2>
+        <p class="text-center text-lg text-gray-600 mb-6 max-w-3xl mx-auto">
+          Real stories from our satisfied customers who have transformed their
+          health with Forever Living Products.
+        </p>
         <div
           class="testimonials-grid grid gap-6 text-center md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1"
         >
@@ -220,12 +223,35 @@
         <div class="text-center mt-8">
           <button
             id="submitTestimonialBtn"
-            class="px-6 py-3 text-white font-bold rounded-lg shadow-md hover:bg-yellow-600 transition"
+            class="px-6 py-3 bg-yellow-500 text-white font-bold rounded-lg shadow-md hover:bg-yellow-600 transition"
           >
             Submit Your Testimonial
           </button>
         </div>
-      </div>
+      </section>
+
+      <!-- Featured Testimonials Stories -->
+      <section
+        id="featured-testimonials"
+        class="featured-testimonials-section py-16 px-5 bg-gray-100"
+      >
+        <h2 class="text-center text-4xl font-bold text-gray-800 mb-10">
+          Featured Success Stories
+        </h2>
+        <p class="text-center text-lg text-gray-600 mb-6 max-w-3xl mx-auto">
+          See how Forever Living is changing lives with real transformations.
+        </p>
+        <div
+          class="max-w-6xl mx-auto relative swiper-container"
+          id="testimonials-container"
+        >
+          <!-- Testimonials will be dynamically generated here -->
+          <div class="swiper-wrapper"></div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </section>
 
       <!-- FAQ Section -->
       <div class="faq-section my-12">
@@ -396,6 +422,13 @@
         <p>&copy; 2024 Forever Living Products Kenya. All rights reserved.</p>
       </div>
     </footer>
+
+    <!-- Swiper CDN -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <!-- JavaScript -->
     <script type="module" src="/scripts/index.js"></script>

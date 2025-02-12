@@ -22,6 +22,7 @@ import "./handleSearch.js";
 import "./sidebar.js";
 import "./newsletter.js";
 import "./contact.js";
+import "./featuredTestimonials.js";
 
 let currentPage = 1;
 let totalPages = 1;
