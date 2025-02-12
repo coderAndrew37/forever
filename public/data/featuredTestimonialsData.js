@@ -42,5 +42,3 @@ export const testimonials = [
     afterImg: "/images/testimonials/jane-before-after.jpg",
   },
 ];
-
-console.log(testimonials);
