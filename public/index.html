@@ -26,8 +26,9 @@
     <link rel="stylesheet" href="/styles/shared/sidebar-animations.css" />
   </head>
   <body>
+    <!-- 🏷️ Main Navigation (Contains Home, About, Contact, etc.) -->
     <header
-      class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white shadow-md"
+      class="fixed top-0 left-0 w-full z-50 bg-white shadow-md transition-all duration-300"
     >
       <div
         class="container mx-auto flex items-center justify-between px-6 py-4"
@@ -38,60 +39,20 @@
           <span class="text-2xl font-bold text-gray-900">Forever Living</span>
         </a>
 
-        <!-- Navigation (Desktop) -->
-        <nav class="lg:flex space-x-8 text-lg font-medium text-gray-900">
+        <!-- Main Navigation Links -->
+        <nav
+          id="main-nav"
+          class="hidden lg:flex space-x-8 text-lg font-medium text-gray-900"
+        >
           <a href="/" class="hover:text-yellow-500">Home</a>
           <a href="/exclusive-deals.html" class="hover:text-yellow-500"
             >Exclusive Deals</a
           >
           <a href="/about.html" class="hover:text-yellow-500">About Us</a>
           <a href="/contact.html" class="hover:text-yellow-500">Contact</a>
-
-          <!-- Mega Menu -->
-          <div class="relative group">
-            <button class="hover:text-yellow-500 flex items-center">
-              Categories <i class="fas fa-chevron-down ml-1"></i>
-            </button>
-            <div
-              class="absolute left-0 mt-2 w-80 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-4 grid grid-cols-2 gap-4"
-            >
-              <div>
-                <a href="/category/drinks" class="block hover:text-yellow-500"
-                  >Drinks</a
-                >
-                <a
-                  href="/category/bee-products"
-                  class="block hover:text-yellow-500"
-                  >Bee Products</a
-                >
-                <a
-                  href="/category/nutritional-supplements"
-                  class="block hover:text-yellow-500"
-                  >Nutritional Supplements</a
-                >
-              </div>
-              <div>
-                <a
-                  href="/category/weight-management"
-                  class="block hover:text-yellow-500"
-                  >Weight Management</a
-                >
-                <a
-                  href="/category/personal-care"
-                  class="block hover:text-yellow-500"
-                  >Personal Care</a
-                >
-                <a
-                  href="/category/skin-care"
-                  class="block hover:text-yellow-500"
-                  >Skin Care</a
-                >
-              </div>
-            </div>
-          </div>
         </nav>
 
-        <!-- Right Section: Search, Cart & Mobile Menu Button -->
+        <!-- Right Section: Search, Cart & Mobile Menu -->
         <div class="flex items-center space-x-4">
           <button class="js-search-toggle text-gray-900 hover:text-yellow-500">
             <i class="fas fa-search text-xl"></i>
@@ -111,7 +72,6 @@
               >0</span
             >
           </a>
-          <!-- Mobile Menu Button -->
           <button
             class="lg:hidden js-menu-toggle text-gray-900 hover:text-yellow-500"
           >
@@ -120,6 +80,19 @@
         </div>
       </div>
     </header>
+
+    <!-- 🏷️ Secondary Navigation (Categories) -->
+    <nav
+      id="category-nav"
+      class="fixed top-[4rem] left-0 w-full bg-white shadow-md transition-all duration-300"
+    >
+      <div
+        id="categories-container"
+        class="container mx-auto flex justify-center space-x-6 py-2 text-gray-900 font-medium text-lg"
+      >
+        <!-- Categories will be dynamically inserted here -->
+      </div>
+    </nav>
 
     <!-- Search Bar (Hidden Initially) -->
     <div
@@ -218,9 +191,6 @@
           </div>
         </div>
       </section>
-
-      <!-- Categories Section -->
-      <div class="categories-section" id="categories"></div>
 
       <!-- Featured Products Section -->
       <section class="main py-16 bg-gray-50" id="featured-products">

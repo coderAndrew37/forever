@@ -4,6 +4,7 @@ import { initAddToCartListeners, isAuthenticated } from "./utils/cartUtils.js";
 import { updateCartQuantity } from "../data/cart.js";
 import "./authButton.js";
 import "./handleSearch.js";
+import "./categoryNav.js";
 
 const productsContainerSelector = ".js-products-grid";
 const categoryTitle = document.getElementById("category-title");

@@ -4,7 +4,6 @@ import { loadProducts } from "./utils/renderUtils.js";
 import {
   renderProducts,
   renderPagination,
-  renderCategories,
   renderFAQs,
   renderTestimonials,
   renderSpecialOffers,
@@ -12,13 +11,12 @@ import {
 } from "./utils/renderUtils.js";
 
 import { faqs } from "./data/faqsData.js";
-import { categories } from "./data/categoriesData.js";
 import { testimonials } from "./data/testimonialsData.js";
 import { specialOffers } from "./data/specialOffersData.js";
 import { isAuthenticated, initAddToCartListeners } from "./utils/cartUtils.js";
 import "./authButton.js";
 import "./handleSearch.js";
-
+import "./categoryNav.js";
 import "./sidebar.js";
 import "./newsletter.js";
 import "./featuredTestimonials.js";
@@ -33,7 +31,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   fetchAndDisplayProducts(currentPage, authenticated);
-  renderCategories(categories);
   renderFAQs(faqs);
   renderTestimonials(testimonials);
   renderSpecialOffers(specialOffers);
