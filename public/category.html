@@ -10,38 +10,145 @@
 
     <!-- Tailwind css -->
     <link rel="stylesheet" href="/styles/tailwind.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
-    <!-- Header Section -->
-    <div class="amazon-header">
-      <div class="amazon-header-left-section">
-        <a href="/" class="header-link" data-tooltip="Home">
-          <img
-            class="amazon-logo"
-            src="images/logo.jpg"
-            alt="Forevr Living Logo"
-          />
+    <header
+      class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white shadow-md"
+    >
+      <div
+        class="container mx-auto flex items-center justify-between px-6 py-4"
+      >
+        <!-- Logo -->
+        <a href="/" class="flex items-center space-x-2">
+          <img src="/images/logo.jpg" alt="Forever Living" class="h-10 w-10" />
+          <span class="text-2xl font-bold text-gray-900">Forever Living</span>
         </a>
+
+        <!-- Navigation (Desktop) -->
+        <nav class="hidden lg:flex space-x-8 text-lg font-medium text-gray-900">
+          <a href="/" class="hover:text-yellow-500">Home</a>
+          <a href="/exclusive-deals.html" class="hover:text-yellow-500"
+            >Exclusive Deals</a
+          >
+          <a href="/about.html" class="hover:text-yellow-500">About Us</a>
+          <a href="/contact.html" class="hover:text-yellow-500">Contact</a>
+
+          <!-- Mega Menu -->
+          <div class="relative group">
+            <button class="hover:text-yellow-500 flex items-center">
+              Categories <i class="fas fa-chevron-down ml-1"></i>
+            </button>
+            <div
+              class="absolute left-0 mt-2 w-80 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-4 grid grid-cols-2 gap-4"
+            >
+              <div>
+                <a href="/category/drinks" class="block hover:text-yellow-500"
+                  >Drinks</a
+                >
+                <a
+                  href="/category/bee-products"
+                  class="block hover:text-yellow-500"
+                  >Bee Products</a
+                >
+                <a
+                  href="/category/nutritional-supplements"
+                  class="block hover:text-yellow-500"
+                  >Nutritional Supplements</a
+                >
+              </div>
+              <div>
+                <a
+                  href="/category/weight-management"
+                  class="block hover:text-yellow-500"
+                  >Weight Management</a
+                >
+                <a
+                  href="/category/personal-care"
+                  class="block hover:text-yellow-500"
+                  >Personal Care</a
+                >
+                <a
+                  href="/category/skin-care"
+                  class="block hover:text-yellow-500"
+                  >Skin Care</a
+                >
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Right Section: Search, Cart & Mobile Menu Button -->
+        <div class="flex items-center space-x-4">
+          <button class="js-search-toggle text-gray-900 hover:text-yellow-500">
+            <i class="fas fa-search text-xl"></i>
+          </button>
+          <button
+            class="js-auth-button bg-blue-500 text-white px-4 py-2 rounded-lg"
+          >
+            Login
+          </button>
+          <a
+            href="/checkout.html"
+            class="relative text-gray-900 hover:text-yellow-500"
+          >
+            <i class="fas fa-shopping-cart text-2xl"></i>
+            <span
+              class="absolute -top-2 -right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full js-cart-quantity"
+              >0</span
+            >
+          </a>
+          <!-- Mobile Menu Button -->
+          <button
+            class="lg:hidden js-menu-toggle text-gray-900 hover:text-yellow-500"
+          >
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+        </div>
       </div>
-      <div class="amazon-header-middle-section">
+    </header>
+
+    <!-- Search Bar (Hidden Initially) -->
+    <div
+      class="js-search-bar-container fixed top-0 left-0 w-full bg-white shadow-md p-4 z-50 transform -translate-y-full transition-transform duration-500 ease-in-out"
+    >
+      <div class="container mx-auto flex items-center justify-between relative">
         <input
-          class="search-bar"
           type="text"
-          placeholder="Search for fashion..."
+          class="js-search-bar w-full px-4 py-2 border rounded-lg"
+          placeholder="Search products..."
         />
-        <button class="search-button"><i class="fas fa-search"></i></button>
-      </div>
-      <div class="amazon-header-right-section">
-        <a class="orders-link header-link" href="/orders.html">
-          <span class="returns-text">Returns</span>
-          <span class="orders-text">& Orders</span>
-        </a>
-        <a class="cart-link header-link" href="/checkout.html">
-          <img class="cart-icon" src="images/icons/cart-icon.png" alt="Cart" />
-          <div class="cart-quantity js-cart-quantity"></div>
-        </a>
+        <button class="js-search-close text-gray-900 hover:text-red-500 ml-4">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+        <!-- Suggestions Dropdown -->
+        <div
+          class="js-suggestions-dropdown absolute top-full left-0 w-full bg-white shadow-lg hidden"
+        ></div>
       </div>
     </div>
+
+    <!-- Mobile Menu -->
+    <aside
+      class="js-sidebar fixed top-0 left-0 h-full w-64 bg-gray-900 text-white z-50 shadow-lg transform -translate-x-full transition-transform duration-300"
+    >
+      <nav class="p-4 space-y-4">
+        <button class="js-menu-close p-2 bg-red-500 text-white rounded-lg">
+          Close
+        </button>
+        <a href="/" class="block text-lg font-bold text-yellow-500">Home</a>
+        <a href="/exclusive-deals.html" class="block text-lg"
+          >Exclusive Deals</a
+        >
+        <a href="/about.html" class="block text-lg">About Us</a>
+        <a href="/contact.html" class="block text-lg">Contact</a>
+      </nav>
+    </aside>
 
     <!-- Category Products Section -->
     <div class="category-products-section px-4 py-8 bg-gray-100">
