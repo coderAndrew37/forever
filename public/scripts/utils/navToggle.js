@@ -1,25 +1,13 @@
-document.addEventListener("scroll", () => {
-  document
-    .querySelector("header")
-    .classList.toggle("bg-white", window.scrollY > 50);
-});
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.querySelector(".js-menu-toggle");
+  const menuClose = document.querySelector(".js-menu-close");
+  const sidebar = document.querySelector(".js-sidebar");
 
-document.querySelector(".js-menu-toggle").addEventListener("click", () => {
-  document.querySelector(".js-sidebar").classList.remove("-translate-x-full");
-});
+  menuToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("-translate-x-full");
+  });
 
-document.querySelector(".js-menu-close").addEventListener("click", () => {
-  document.querySelector(".js-sidebar").classList.add("-translate-x-full");
-});
-
-document.querySelector(".js-search-toggle").addEventListener("click", () => {
-  document
-    .querySelector(".js-search-bar-container")
-    .classList.remove("-translate-y-full");
-});
-
-document.querySelector(".js-search-close").addEventListener("click", () => {
-  document
-    .querySelector(".js-search-bar-container")
-    .classList.add("-translate-y-full");
+  menuClose.addEventListener("click", () => {
+    sidebar.classList.add("-translate-x-full");
+  });
 });

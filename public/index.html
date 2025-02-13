@@ -32,7 +32,7 @@
   <body>
     <!-- Enhanced Navigation with Search Toggle & Authentication -->
     <header
-      class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent"
+      class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white shadow-md"
     >
       <div
         class="container mx-auto flex items-center justify-between px-6 py-4"
@@ -43,7 +43,7 @@
           <span class="text-2xl font-bold text-gray-900">Forever Living</span>
         </a>
 
-        <!-- Navigation -->
+        <!-- Navigation (Desktop) -->
         <nav class="hidden lg:flex space-x-8 text-lg font-medium text-gray-900">
           <a href="/" class="hover:text-yellow-500">Home</a>
           <a href="/exclusive-deals.html" class="hover:text-yellow-500"
@@ -96,7 +96,7 @@
           </div>
         </nav>
 
-        <!-- Search Icon & Auth -->
+        <!-- Right Section: Search, Cart & Mobile Menu Button -->
         <div class="flex items-center space-x-4">
           <button class="js-search-toggle text-gray-900 hover:text-yellow-500">
             <i class="fas fa-search text-xl"></i>
@@ -116,6 +116,7 @@
               >0</span
             >
           </a>
+          <!-- Mobile Menu Button -->
           <button
             class="lg:hidden js-menu-toggle text-gray-900 hover:text-yellow-500"
           >
