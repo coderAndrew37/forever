@@ -22,15 +22,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
 
     <link rel="stylesheet" href="/styles/shared/general.css" />
-    <link rel="stylesheet" href="/styles/shared/amazon-header.css" />
     <link rel="stylesheet" href="/styles/pages/amazon.css" />
-    <link rel="stylesheet" href="/styles/shared/skeletons.css" />
-    <link rel="stylesheet" href="/styles/pages/quiz.css" />
-    <link rel="stylesheet" href="/styles/pages/contact.css" />
     <link rel="stylesheet" href="/styles/shared/sidebar-animations.css" />
   </head>
   <body>
-    <!-- Enhanced Navigation with Search Toggle & Authentication -->
     <header
       class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white shadow-md"
     >
@@ -44,7 +39,7 @@
         </a>
 
         <!-- Navigation (Desktop) -->
-        <nav class="hidden lg:flex space-x-8 text-lg font-medium text-gray-900">
+        <nav class="lg:flex space-x-8 text-lg font-medium text-gray-900">
           <a href="/" class="hover:text-yellow-500">Home</a>
           <a href="/exclusive-deals.html" class="hover:text-yellow-500"
             >Exclusive Deals</a
@@ -320,102 +315,6 @@
           <!-- Dynamic FAQ items will be rendered here -->
         </div>
       </div>
-
-      <!-- Contact Section -->
-      <section class="py-16 bg-white">
-        <div
-          class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12"
-        >
-          <!-- Contact Form -->
-          <div>
-            <h2 class="text-3xl font-bold text-gray-700 mb-6">
-              <i class="fas fa-edit text-blue-500"></i> Send Us a Message
-            </h2>
-            <form id="contactForm" class="mt-8 space-y-6">
-              <div>
-                <label for="name" class="block text-gray-700 font-medium mb-2"
-                  >Your Name</label
-                >
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  class="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-              <div>
-                <label for="email" class="block text-gray-700 font-medium mb-2"
-                  >Your Email</label
-                >
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  for="message"
-                  class="block text-gray-700 font-medium mb-2"
-                  >Your Message</label
-                >
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="5"
-                  class="w-full px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Write your message"
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                class="submit-button w-full bg-yellow-500 text-white py-3 font-bold rounded-lg shadow-lg hover:bg-yellow-600 focus:outline-none"
-              >
-                Send Message
-              </button>
-              <div id="formMessage" class="hidden text-center mt-4"></div>
-              <div class="spinner-container hidden flex justify-center mt-4">
-                <div class="spinner border-t-4 border-yellow-500 w-8 h-8"></div>
-              </div>
-            </form>
-          </div>
-
-          <!-- Contact Info -->
-          <div>
-            <h2 class="text-3xl font-bold text-gray-700 mb-6">
-              <i class="fas fa-info-circle text-green-500"></i> Contact Info
-            </h2>
-            <ul class="space-y-4">
-              <li class="flex items-center space-x-4">
-                <i class="fas fa-map-marker-alt text-red-500 text-xl"></i>
-                <span class="text-gray-700"
-                  >14 Greenroad St., Nairobi, Kenya</span
-                >
-              </li>
-              <li class="flex items-center space-x-4">
-                <i class="fas fa-envelope text-blue-500 text-xl"></i>
-                <span class="text-gray-700">info@getintouch.we</span>
-              </li>
-              <li class="flex items-center space-x-4">
-                <i class="fas fa-phone text-yellow-500 text-xl"></i>
-                <span class="text-gray-700">+254 746 577 838</span>
-              </li>
-              <li class="flex items-center space-x-4">
-                <i class="fas fa-clock text-teal-500 text-xl"></i>
-                <span class="text-gray-700"
-                  >Monday - Friday: 9:00 AM - 6:00 PM</span
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
 
       <!-- Newsletter Section -->
       <section class="py-16 bg-gray-50">

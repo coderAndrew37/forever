@@ -17,11 +17,10 @@ import { testimonials } from "./data/testimonialsData.js";
 import { specialOffers } from "./data/specialOffersData.js";
 import { isAuthenticated, initAddToCartListeners } from "./utils/cartUtils.js";
 import "./authButton.js";
-import "./utils/navToggle.js";
 import "./handleSearch.js";
+
 import "./sidebar.js";
 import "./newsletter.js";
-import "./contact.js";
 import "./featuredTestimonials.js";
 
 let currentPage = 1;
@@ -100,17 +99,4 @@ document.querySelectorAll(".faq-question").forEach((button) => {
       answer.style.maxHeight = 0;
     }
   });
-});
-
-// Select elements
-const searchBar = document.querySelector(".js-search-bar");
-const suggestionsDropdown = document.querySelector(".js-suggestions-dropdown");
-
-// Show suggestions dropdown when user starts typing
-searchBar.addEventListener("input", () => {
-  if (searchBar.value.trim() !== "") {
-    suggestionsDropdown.style.display = "block";
-  } else {
-    suggestionsDropdown.style.display = "none";
-  }
 });

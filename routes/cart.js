@@ -27,29 +27,27 @@ router.get("/get-cart", authMiddleware, async (req, res) => {
 });
 
 // Add product to the user's cart
+// Add product to the user's cart
 router.post("/add-to-cart", authMiddleware, async (req, res) => {
-  let { productId, quantity } = req.body;
+  const { productId, quantity } = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(productId)) {
+  if (!productId || !mongoose.Types.ObjectId.isValid(productId)) {
     return res.status(400).json({ message: "Invalid or missing product ID." });
   }
 
   try {
-    productId = new mongoose.Types.ObjectId(productId); // ✅ Convert to ObjectId
-
     const user = await User.findById(req.user.userId);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found." });
-    }
+    if (!user) return res.status(404).json({ message: "User not found." });
 
     const existingItemIndex = user.cart.findIndex(
-      (item) => item.productId.equals(productId) // ✅ Use `.equals()` for ObjectId comparison
+      (item) => item.productId.toString() === productId
     );
 
     if (existingItemIndex >= 0) {
+      // ✅ Prevent duplicate item with a new _id
       user.cart[existingItemIndex].quantity += quantity;
     } else {
+      // ✅ Ensure same product isn't added again as a new entry
       user.cart.push({ productId, quantity });
     }
 

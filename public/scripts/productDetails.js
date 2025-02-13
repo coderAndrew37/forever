@@ -8,9 +8,7 @@ import { fetchCart } from "./cartPreview.js"; // ✅ Import `fetchCart`
 
 document.addEventListener("DOMContentLoaded", async () => {
   const authenticated = await isAuthenticated();
-  if (authenticated) {
-    updateCartQuantity();
-  }
+  if (authenticated) updateCartQuantity();
 
   const params = new URLSearchParams(window.location.search);
   const productId = params.get("id");
@@ -22,13 +20,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const response = await fetch(`${baseUrl}/api/products/${productId}`);
-    if (!response.ok) {
+    if (!response.ok)
       throw new Error(`Failed to fetch product details: ${response.status}`);
-    }
 
     const product = await response.json();
     renderProductDetails(product);
-    initAddToCartListener(productId);
   } catch (error) {
     console.error(error);
     showToast("Error loading product details.", "error");
@@ -40,12 +36,14 @@ function renderProductDetails(product) {
   container.innerHTML = `
     <div class="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Image Section -->
         <div class="relative">
           <img src="${product.image}" alt="${product.name}"
             class="w-full rounded-lg mb-4 transform hover:scale-105 transition duration-300 ease-in-out shadow-md" />
           <div class="grid grid-cols-2 gap-4">
             ${product.gallery
-              .slice(0, 2)
+              .slice(0, 4) // ✅ Show up to 4 images instead of 2
               .map(
                 (image) => ` 
                 <img src="${image}" alt="Gallery Image"
@@ -56,13 +54,36 @@ function renderProductDetails(product) {
           </div>
         </div>
 
+        <!-- Product Details -->
         <div>
           <h2 class="text-3xl font-bold text-gray-800 mb-4">${product.name}</h2>
           <p class="text-gray-600 mb-4">${product.description}</p>
+
+          <!-- Benefits Section -->
+          <h3 class="text-xl font-semibold text-gray-700 mb-2">Benefits</h3>
+          <ul class="list-disc pl-5 mb-4">
+            ${product.benefits
+              .map(
+                (benefit) => ` 
+                <li class="flex items-start mb-2">
+                  <i class="${benefit.icon} text-green-600 mr-2"></i>
+                  <span>${benefit.text}</span>
+                </li>
+              `
+              )
+              .join("")}
+          </ul>
+
+          <!-- Usage Section -->
+          <h3 class="text-xl font-semibold text-gray-700 mb-2">Usage</h3>
+          <p class="text-gray-600 mb-4">${product.usage}</p>
+
+          <!-- Pricing -->
           <div class="text-green-600 font-bold text-3xl mb-4">
             KSH ${(product.priceCents / 100).toLocaleString("en-KE")}
           </div>
 
+          <!-- Quantity Selector -->
           <div class="mb-4">
             <label for="quantity" class="block text-gray-600 mb-2 font-medium">Quantity</label>
             <select id="quantity"
@@ -74,24 +95,44 @@ function renderProductDetails(product) {
             </select>
           </div>
 
+          <!-- Add to Cart Button -->
           <button
             class="js-add-to-cart w-full bg-yellow-500 text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition duration-300 ease-in-out disabled:opacity-50"
             data-product-id="${
               product._id
-            }"  // ✅ Ensure id from MongoDB is used
+            }"  // ✅ Ensure MongoDB ObjectId is used
           >
             Add to Cart
           </button>
+
+          <!-- Added to Cart Notification -->
+          <p class="added-to-cart text-green-600 mt-2 text-center opacity-0 transition-opacity duration-300">
+            ✅ Added to cart!
+          </p>
         </div>
       </div>
     </div>
   `;
+
+  // ✅ Restore Add to Cart functionality
+  initAddToCartListener(product._id);
 }
 
 function initAddToCartListener(productId) {
   const addToCartButton = document.querySelector(".js-add-to-cart");
 
-  addToCartButton.addEventListener("click", async () => {
+  if (!addToCartButton) {
+    console.error("❌ Error: Add to Cart button not found.");
+    return;
+  }
+
+  // ✅ Remove any existing event listeners before adding a new one
+  const newButton = addToCartButton.cloneNode(true);
+  addToCartButton.replaceWith(newButton);
+
+  newButton.addEventListener("click", async () => {
+    console.log("🛒 Add to Cart clicked"); // ✅ Debug log
+
     const quantitySelector = document.getElementById("quantity");
     const quantity = quantitySelector ? parseInt(quantitySelector.value) : 1;
 
@@ -104,24 +145,24 @@ function initAddToCartListener(productId) {
       if (proceedToLogin) {
         window.location.href = "/login.html";
       } else {
-        showToast("You must log in to add items.", "error");
+        showToast("❌ You must log in to add items.", "error");
       }
       return;
     }
 
     try {
-      addToCartButton.disabled = true;
+      newButton.disabled = true;
       await addToCart(productId, quantity);
       updateCartQuantity();
       showToast("✅ Added to cart!", "success");
 
-      // Fetch updated cart preview
+      // ✅ Fetch updated cart preview after adding to cart
       await fetchCart();
     } catch (error) {
-      console.error("Error adding product to cart:", error);
+      console.error("❌ Error adding product to cart:", error);
       showToast("Failed to add item to cart.", "error");
     } finally {
-      addToCartButton.disabled = false;
+      newButton.disabled = false;
     }
   });
 }

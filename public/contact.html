@@ -13,33 +13,128 @@
     <link rel="stylesheet" href="/styles/shared/sidebar-animations.css" />
   </head>
   <body class="bg-gray-100 font-roboto">
-    <!-- Header -->
     <header
-      class="fixed top-0 left-0 w-full bg-gray-900 text-white z-50 shadow-md"
+      class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white shadow-md"
     >
       <div
-        class="max-w-7xl mx-auto flex items-center justify-between px-4 py-4"
+        class="container mx-auto flex items-center justify-between px-6 py-4"
       >
-        <button
-          class="js-menu-toggle p-2 bg-yellow-500 text-white rounded-lg"
-          aria-label="Open Menu"
-        >
-          <i class="fas fa-bars"></i>
-        </button>
-        <h1 class="text-2xl font-bold">Forever Living Products</h1>
+        <!-- Logo -->
+        <a href="/" class="flex items-center space-x-2">
+          <img src="/images/logo.jpg" alt="Forever Living" class="h-10 w-10" />
+          <span class="text-2xl font-bold text-gray-900">Forever Living</span>
+        </a>
+
+        <!-- Navigation (Desktop) -->
+        <nav class="hidden lg:flex space-x-8 text-lg font-medium text-gray-900">
+          <a href="/" class="hover:text-yellow-500">Home</a>
+          <a href="/exclusive-deals.html" class="hover:text-yellow-500"
+            >Exclusive Deals</a
+          >
+          <a href="/about.html" class="hover:text-yellow-500">About Us</a>
+          <a href="/contact.html" class="hover:text-yellow-500">Contact</a>
+
+          <!-- Mega Menu -->
+          <div class="relative group">
+            <button class="hover:text-yellow-500 flex items-center">
+              Categories <i class="fas fa-chevron-down ml-1"></i>
+            </button>
+            <div
+              class="absolute left-0 mt-2 w-80 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-4 grid grid-cols-2 gap-4"
+            >
+              <div>
+                <a href="/category/drinks" class="block hover:text-yellow-500"
+                  >Drinks</a
+                >
+                <a
+                  href="/category/bee-products"
+                  class="block hover:text-yellow-500"
+                  >Bee Products</a
+                >
+                <a
+                  href="/category/nutritional-supplements"
+                  class="block hover:text-yellow-500"
+                  >Nutritional Supplements</a
+                >
+              </div>
+              <div>
+                <a
+                  href="/category/weight-management"
+                  class="block hover:text-yellow-500"
+                  >Weight Management</a
+                >
+                <a
+                  href="/category/personal-care"
+                  class="block hover:text-yellow-500"
+                  >Personal Care</a
+                >
+                <a
+                  href="/category/skin-care"
+                  class="block hover:text-yellow-500"
+                  >Skin Care</a
+                >
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Right Section: Search, Cart & Mobile Menu Button -->
+        <div class="flex items-center space-x-4">
+          <button class="js-search-toggle text-gray-900 hover:text-yellow-500">
+            <i class="fas fa-search text-xl"></i>
+          </button>
+          <button
+            class="js-auth-button bg-blue-500 text-white px-4 py-2 rounded-lg"
+          >
+            Login
+          </button>
+          <a
+            href="/checkout.html"
+            class="relative text-gray-900 hover:text-yellow-500"
+          >
+            <i class="fas fa-shopping-cart text-2xl"></i>
+            <span
+              class="absolute -top-2 -right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full js-cart-quantity"
+              >0</span
+            >
+          </a>
+          <!-- Mobile Menu Button -->
+          <button
+            class="lg:hidden js-menu-toggle text-gray-900 hover:text-yellow-500"
+          >
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+        </div>
       </div>
     </header>
 
-    <!-- Sidebar -->
+    <!-- Search Bar (Hidden Initially) -->
     <div
-      class="js-sidebar sidebar sidebar-closed fixed top-0 left-0 h-full w-64 bg-gray-900 text-white z-50 shadow-lg"
+      class="js-search-bar-container fixed top-0 left-0 w-full bg-white shadow-md p-4 z-50 transform -translate-y-full transition-transform duration-500 ease-in-out"
+    >
+      <div class="container mx-auto flex items-center justify-between relative">
+        <input
+          type="text"
+          class="js-search-bar w-full px-4 py-2 border rounded-lg"
+          placeholder="Search products..."
+        />
+        <button class="js-search-close text-gray-900 hover:text-red-500 ml-4">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+        <!-- Suggestions Dropdown -->
+        <div
+          class="js-suggestions-dropdown absolute top-full left-0 w-full bg-white shadow-lg hidden"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <aside
+      class="js-sidebar fixed top-0 left-0 h-full w-64 bg-gray-900 text-white z-50 shadow-lg transform -translate-x-full transition-transform duration-300"
     >
       <nav class="p-4 space-y-4">
-        <button
-          class="js-menu-close p-2 bg-red-500 text-white rounded-lg"
-          aria-label="Close Menu"
-        >
-          <i class="fas fa-times"></i>
+        <button class="js-menu-close p-2 bg-red-500 text-white rounded-lg">
+          Close
         </button>
         <a href="/" class="block text-lg font-bold text-yellow-500">Home</a>
         <a href="/exclusive-deals.html" class="block text-lg"
@@ -48,10 +143,7 @@
         <a href="/about.html" class="block text-lg">About Us</a>
         <a href="/contact.html" class="block text-lg">Contact</a>
       </nav>
-    </div>
-
-    <!-- Overlay -->
-    <div class="js-overlay overlay fixed inset-0 z-40" aria-hidden="true"></div>
+    </aside>
 
     <!-- Main Content -->
     <main class="pt-16">
@@ -185,6 +277,99 @@
       </section>
     </main>
 
+     <!-- Professional Footer-Sitemap -->
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Company Info -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">Company</h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="/about.html" class="hover:text-yellow-500">About Us</a>
+            </li>
+            <li>
+              <a href="/contact.html" class="hover:text-yellow-500">Contact</a>
+            </li>
+            <li>
+              <a href="/careers.html" class="hover:text-yellow-500">Careers</a>
+            </li>
+            <li><a href="/blog.html" class="hover:text-yellow-500">Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">Resources</h3>
+          <ul class="space-y-2">
+            <li><a href="/faq.html" class="hover:text-yellow-500">FAQs</a></li>
+            <li>
+              <a href="/privacy.html" class="hover:text-yellow-500"
+                >Privacy Policy</a
+              >
+            </li>
+            <li>
+              <a href="/terms.html" class="hover:text-yellow-500"
+                >Terms & Conditions</a
+              >
+            </li>
+            <li>
+              <a href="/support.html" class="hover:text-yellow-500">Support</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Customer Support -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">Customer Support</h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="/returns.html" class="hover:text-yellow-500"
+                >Returns Policy</a
+              >
+            </li>
+            <li>
+              <a href="/shipping.html" class="hover:text-yellow-500"
+                >Shipping Info</a
+              >
+            </li>
+            <li>
+              <a href="/order-tracking.html" class="hover:text-yellow-500"
+                >Order Tracking</a
+              >
+            </li>
+            <li>
+              <a href="/affiliates.html" class="hover:text-yellow-500"
+                >Affiliate Program</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Social Links -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+          <div class="flex space-x-4">
+            <a href="#" class="text-xl hover:text-yellow-500"
+              ><i class="fab fa-facebook"></i
+            ></a>
+            <a href="#" class="text-xl hover:text-yellow-500"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="#" class="text-xl hover:text-yellow-500"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" class="text-xl hover:text-yellow-500"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright Section -->
+      <div class="text-center mt-8 border-t pt-4">
+        <p>&copy; 2024 Forever Living Products Kenya. All rights reserved.</p>
+      </div>
+    </footer>
     <script src="./scripts/sidebar.js" type="module"></script>
     <script src="./scripts/contact.js" type="module"></script>
     <script src="./scripts/newsletter.js" type="module"></script>
