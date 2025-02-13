@@ -28,13 +28,15 @@ router.get("/get-cart", authMiddleware, async (req, res) => {
 
 // Add product to the user's cart
 router.post("/add-to-cart", authMiddleware, async (req, res) => {
-  const { productId, quantity } = req.body;
+  let { productId, quantity } = req.body;
 
-  if (!productId || !mongoose.Types.ObjectId.isValid(productId)) {
+  if (!mongoose.Types.ObjectId.isValid(productId)) {
     return res.status(400).json({ message: "Invalid or missing product ID." });
   }
 
   try {
+    productId = new mongoose.Types.ObjectId(productId); // ✅ Convert to ObjectId
+
     const user = await User.findById(req.user.userId);
 
     if (!user) {
@@ -42,14 +44,12 @@ router.post("/add-to-cart", authMiddleware, async (req, res) => {
     }
 
     const existingItemIndex = user.cart.findIndex(
-      (item) => item.productId.toString() === productId
+      (item) => item.productId.equals(productId) // ✅ Use `.equals()` for ObjectId comparison
     );
 
     if (existingItemIndex >= 0) {
-      // Increment quantity if item exists
       user.cart[existingItemIndex].quantity += quantity;
     } else {
-      // Add as new item otherwise
       user.cart.push({ productId, quantity });
     }
 
@@ -103,13 +103,19 @@ router.delete(
   "/remove-from-cart/:productId",
   authMiddleware,
   async (req, res) => {
-    const { productId } = req.params;
+    let { productId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: "Invalid product ID." });
+    }
 
     try {
+      productId = new mongoose.Types.ObjectId(productId); // ✅ Convert to ObjectId
+
       const updatedUser = await User.findOneAndUpdate(
         { _id: req.user.userId },
-        { $pull: { cart: { productId } } }, // Remove the product from the cart array
-        { new: true } // Return the updated document
+        { $pull: { cart: { productId } } }, // ✅ Ensure productId matches as ObjectId
+        { new: true }
       );
 
       if (!updatedUser) {

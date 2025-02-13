@@ -3,6 +3,8 @@ import { addToCart, updateCartQuantity } from "../data/cart.js";
 import { isAuthenticated } from "./utils/cartUtils.js";
 import "./authButton.js";
 import "./sidebar.js";
+import "./cartPreview.js"; // Importing Cart Preview
+import { fetchCart } from "./cartPreview.js"; // ✅ Import `fetchCart`
 
 document.addEventListener("DOMContentLoaded", async () => {
   const authenticated = await isAuthenticated();
@@ -45,7 +47,7 @@ function renderProductDetails(product) {
             ${product.gallery
               .slice(0, 2)
               .map(
-                (image) => `
+                (image) => ` 
                 <img src="${image}" alt="Gallery Image"
                   class="rounded-lg w-full h-auto transform hover:scale-110 transition duration-300 ease-in-out shadow-md" />
               `
@@ -57,21 +59,6 @@ function renderProductDetails(product) {
         <div>
           <h2 class="text-3xl font-bold text-gray-800 mb-4">${product.name}</h2>
           <p class="text-gray-600 mb-4">${product.description}</p>
-          <h3 class="text-xl font-semibold text-gray-700 mb-2">Benefits</h3>
-          <ul class="list-disc pl-5 mb-4">
-            ${product.benefits
-              .map(
-                (benefit) => `
-                <li class="flex items-start mb-2">
-                  <i class="${benefit.icon} text-green-600 mr-2"></i>
-                  <span>${benefit.text}</span>
-                </li>
-              `
-              )
-              .join("")}
-          </ul>
-          <h3 class="text-xl font-semibold text-gray-700 mb-2">Usage</h3>
-          <p class="text-gray-600 mb-4">${product.usage}</p>
           <div class="text-green-600 font-bold text-3xl mb-4">
             KSH ${(product.priceCents / 100).toLocaleString("en-KE")}
           </div>
@@ -89,6 +76,9 @@ function renderProductDetails(product) {
 
           <button
             class="js-add-to-cart w-full bg-yellow-500 text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition duration-300 ease-in-out disabled:opacity-50"
+            data-product-id="${
+              product._id
+            }"  // ✅ Ensure id from MongoDB is used
           >
             Add to Cart
           </button>
@@ -124,6 +114,9 @@ function initAddToCartListener(productId) {
       await addToCart(productId, quantity);
       updateCartQuantity();
       showToast("✅ Added to cart!", "success");
+
+      // Fetch updated cart preview
+      await fetchCart();
     } catch (error) {
       console.error("Error adding product to cart:", error);
       showToast("Failed to add item to cart.", "error");
