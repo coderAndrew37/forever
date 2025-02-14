@@ -2777,3 +2777,36 @@
 2025-02-13T16:58:47.548Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 2025-02-13T17:49:54.063Z [INFO]: Server running on port 5000
 2025-02-13T17:49:59.728Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-13T19:49:42.416Z [INFO]: Server running on port 5000
+2025-02-13T19:49:46.319Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-13T20:19:34.970Z [INFO]: Server running on port 5000
+2025-02-14T05:35:19.621Z [INFO]: Server running on port 5000
+2025-02-14T05:35:19.636Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 querySrv ECONNREFUSED _mongodb._tcp.cluster0.fbt1k.mongodb.net
+2025-02-14T05:37:18.891Z [INFO]: Server running on port 5000
+2025-02-14T05:39:02.615Z [INFO]: Server running on port 5000
+2025-02-14T05:39:04.435Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T06:00:22.798Z [INFO]: Server running on port 5000
+2025-02-14T06:00:36.410Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T06:01:25.082Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T06:42:08.459Z [INFO]: Server running on port 5000
+2025-02-14T06:42:11.783Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T06:46:24.423Z [INFO]: Server running on port 5000
+2025-02-14T06:46:25.919Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T06:48:07.555Z [INFO]: Server running on port 5000
+2025-02-14T06:48:30.743Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 querySrv ETIMEOUT _mongodb._tcp.cluster0.fbt1k.mongodb.net
+2025-02-14T06:52:25.998Z [INFO]: Server running on port 5000
+2025-02-14T06:52:29.913Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T07:00:04.919Z [INFO]: Server running on port 5000
+2025-02-14T07:00:06.611Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T07:00:28.520Z [INFO]: Server running on port 5000
+2025-02-14T07:00:29.549Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T07:02:54.269Z [INFO]: Server running on port 5000
+2025-02-14T07:02:55.878Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T07:12:03.586Z [INFO]: Server running on port 5000
+2025-02-14T07:12:05.156Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T07:14:20.815Z [INFO]: Server running on port 5000
+2025-02-14T07:14:22.900Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T07:14:46.465Z [INFO]: Server running on port 5000
+2025-02-14T07:14:47.461Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T07:15:06.560Z [INFO]: Server running on port 5000
+2025-02-14T07:15:08.039Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

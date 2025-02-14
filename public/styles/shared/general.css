@@ -246,8 +246,16 @@ input:focus {
   }
 }
 
+/* 🌍 General Navigation Styles */
+#main-nav {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* 🌐 Category Navigation */
 #category-nav {
   transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 49;
+  background: white;
 }
 
 .category-link {
@@ -258,7 +266,39 @@ input:focus {
 }
 
 .category-link:hover {
-  background: #facc15; /* Yellow */
+  background: #facc15;
   color: #fff;
-  transform: translateY(-2px); /* Slight lift */
+  transform: translateY(-2px);
+}
+
+/* 🌟 Category Hover Dropdown */
+.category-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 220px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.group:hover .category-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(10px);
+}
+
+/* 🌍 Responsive Adjustments */
+@media (max-width: 768px) {
+  #category-nav {
+    display: none;
+  }
+
+  .js-sidebar {
+    width: 100%;
+    max-width: 300px;
+  }
 }

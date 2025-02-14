@@ -3,49 +3,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.querySelector(".js-overlay");
   const menuToggle = document.querySelector(".js-menu-toggle");
   const menuClose = document.querySelector(".js-menu-close");
-  const menuIcon = menuToggle.querySelector("i"); // Target the icon inside the toggle button
+  const menuIcon = menuToggle.querySelector("i"); // Toggle menu icon
 
+  if (!sidebar || !menuToggle || !overlay) {
+    console.error("❌ Sidebar, menu toggle, or overlay not found!");
+    return;
+  }
+
+  // ✅ Open Sidebar Function
   const openSidebar = () => {
-    sidebar.classList.remove("sidebar-closed");
-    sidebar.classList.add("sidebar-open");
-    overlay.classList.add("overlay-active");
-
-    // Change menu icon to close icon
-    menuIcon.classList.remove("fa-bars");
-    menuIcon.classList.add("fa-times");
+    sidebar.classList.remove("-translate-x-full"); // Show sidebar
+    overlay.classList.remove("hidden"); // Show overlay
+    menuIcon.classList.replace("fa-bars", "fa-times");
   };
 
+  // ✅ Close Sidebar Function
   const closeSidebar = () => {
-    sidebar.classList.remove("sidebar-open");
-    sidebar.classList.add("sidebar-closed");
-    overlay.classList.remove("overlay-active");
-
-    // Change close icon back to menu icon
-    menuIcon.classList.remove("fa-times");
-    menuIcon.classList.add("fa-bars");
+    sidebar.classList.add("-translate-x-full"); // Hide sidebar
+    overlay.classList.add("hidden"); // Hide overlay
+    menuIcon.classList.replace("fa-times", "fa-bars");
   };
 
-  // Toggle sidebar open and close
+  // 📌 Toggle Sidebar on Menu Click
   menuToggle.addEventListener("click", () => {
-    if (sidebar.classList.contains("sidebar-open")) {
-      closeSidebar();
-    } else {
+    if (sidebar.classList.contains("-translate-x-full")) {
       openSidebar();
+    } else {
+      closeSidebar();
     }
   });
 
-  // Toggle sidebar open and close with keyboard key press (Enter)
-  menuToggle.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      if (sidebar.classList.contains("sidebar-open")) {
-        closeSidebar();
-      } else {
-        openSidebar();
-      }
-    }
-  });
+  // 📌 Close Sidebar when Clicking Close Button
+  menuClose.addEventListener("click", closeSidebar);
 
-  // Close sidebar when close button or overlay is clicked
-  menuClose?.addEventListener("click", closeSidebar); // Optional chaining for close button
+  // 📌 Close Sidebar when Clicking Outside (Overlay)
   overlay.addEventListener("click", closeSidebar);
 });

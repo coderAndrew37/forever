@@ -3,6 +3,7 @@ import { addToCart, updateCartQuantity } from "../data/cart.js";
 import { isAuthenticated } from "./utils/cartUtils.js";
 import "./authButton.js";
 import "./sidebar.js";
+import "./categoryNav.js";
 import "./cartPreview.js"; // Importing Cart Preview
 import { fetchCart } from "./cartPreview.js"; // ✅ Import `fetchCart`
 
