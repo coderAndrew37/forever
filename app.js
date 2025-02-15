@@ -36,6 +36,9 @@ app.use(
 // Serve static files like CSS and JS
 app.use(express.static(path.join(__dirname, "public")));
 
+// ✅ Serve uploaded images & videos as static files
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Initialize all API routes
 require("./startup/routes.js")(app);
 

@@ -10,6 +10,17 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+// ✅ Get All Testimonials for Admin (Both Approved & Pending)
+router.get("/admin", async (req, res) => {
+  try {
+    const testimonials = await Testimonial.find().sort({ createdAt: -1 }); // No approval filter
+    res.json(testimonials);
+  } catch (error) {
+    console.error("Error fetching testimonials for admin:", error);
+    res.status(500).json({ error: "Failed to fetch testimonials." });
+  }
+});
+
 // ✅ Get Testimonials (Only Approved, 3★ and Above)
 router.get("/", async (req, res) => {
   try {
@@ -83,6 +94,20 @@ router.put("/:id/approve", async (req, res) => {
   } catch (error) {
     console.error("Error approving testimonial:", error);
     res.status(500).json({ error: "Failed to approve testimonial." });
+  }
+});
+
+// ✅ Delete a Testimonial
+router.delete("/:id", async (req, res) => {
+  try {
+    const testimonial = await Testimonial.findByIdAndDelete(req.params.id);
+    if (!testimonial) {
+      return res.status(404).json({ error: "Testimonial not found." });
+    }
+    res.json({ message: "Testimonial deleted successfully!" });
+  } catch (error) {
+    console.error("Error deleting testimonial:", error);
+    res.status(500).json({ error: "Failed to delete testimonial." });
   }
 });
 
