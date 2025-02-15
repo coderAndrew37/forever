@@ -103,84 +103,7 @@ export function renderProducts(products, containerSelector) {
   initAddToCartListeners();
 }
 
-//rendering packs
-export async function renderPacks(containerSelector) {
-  const packsContainer = document.querySelector(containerSelector);
-
-  if (!packsContainer) return;
-
-  try {
-    const response = await fetch("/api/packs"); // Fetch packs from the API
-
-    if (!response.ok) throw new Error("Failed to fetch packs");
-
-    const packs = await response.json();
-
-    // Render packs with name, image, and a clickable link to pack-details
-    packsContainer.innerHTML = packs
-      .map(
-        (pack) => `
-        <div class="pack-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-          <a href="/pack-details.html?slug=${pack.slug}">
-            <img
-              src="${pack.packImage || "/images/default-pack.jpg"}"
-              alt="${pack.name}"
-              class="h-48 w-full object-cover"
-            />
-            <div class="p-4">
-              <h3 class="text-lg font-semibold text-gray-800">${pack.name}</h3>
-            </div>
-          </a>
-        </div>
-      `
-      )
-      .join(""); // Combine all pack HTML into a single string
-  } catch (error) {
-    console.error("Error rendering packs:", error);
-
-    packsContainer.innerHTML = `
-      <p class="text-center text-gray-600">Failed to load packs. Please try again later.</p>
-    `;
-  }
-}
-
-export async function renderFeaturedPacks(containerSelector) {
-  const packsContainer = document.querySelector(containerSelector);
-
-  if (!packsContainer) return;
-
-  try {
-    const response = await fetch("/api/packs");
-    if (!response.ok) throw new Error("Failed to fetch packs");
-
-    const packs = await response.json();
-
-    packsContainer.innerHTML = packs
-      .map(
-        (pack) => `
-        <div class="pack-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-          <a href="/packs/${pack.slug}">
-            <img
-              src="${pack.productIds[0]?.image || "/images/default-pack.jpg"}"
-              alt="${pack.name}"
-              class="h-48 w-full object-cover"
-            />
-            <div class="p-4">
-              <h3 class="text-lg font-semibold text-gray-800">${pack.name}</h3>
-            </div>
-          </a>
-        </div>
-      `
-      )
-      .join("");
-  } catch (error) {
-    console.error("Error rendering featured packs:", error);
-    packsContainer.innerHTML = `
-      <p class="text-center text-gray-600">Failed to load packs. Please try again later.</p>
-    `;
-  }
-}
-
+// Render pagination
 export function renderPagination(
   currentPage,
   totalPages,
@@ -218,31 +141,6 @@ export function renderPagination(
       }
     });
   });
-}
-
-export function renderCategories(categories) {
-  const categoriesSection = document.querySelector(".categories-section");
-  if (!categoriesSection) return;
-
-  categoriesSection.innerHTML = `
-    <h2>Explore Our Categories</h2>
-    <div class="categories-grid">
-      ${categories
-        .map(
-          (category) => `
-          <div class="category-item">
-            <a href="category.html?category=${category.slug}" class="category-link">
-              <div class="category-image">
-                <img src="${category.image}" alt="${category.name}" />
-              </div>
-              <h3>${category.name}</h3>
-            </a>
-          </div>
-        `
-        )
-        .join("")}
-    </div>
-  `;
 }
 
 export function renderFAQs(faqs) {
@@ -290,58 +188,6 @@ export function renderFAQs(faqs) {
       const answer = button.nextElementSibling;
       answer.style.maxHeight = expanded ? 0 : `${answer.scrollHeight}px`;
     });
-  });
-}
-
-export function renderTestimonials(testimonials) {
-  const testimonialsSection = document.querySelector(".testimonials-section");
-  if (!testimonialsSection) return;
-
-  testimonialsSection.innerHTML = `
-    <h2 class="text-center text-3xl font-bold text-gray-800 mb-10">
-      What Our Customers Say
-    </h2>
-    <div class="testimonials-grid grid gap-6 text-center md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1">
-      ${testimonials
-        .map(
-          (testimonial) => `
-          <div
-            class="testimonial-item bg-white p-5 rounded-lg shadow-md opacity-0 transform translate-y-10 transition-all duration-500"
-          >
-            <p class="text-gray-600 italic mb-4">"${testimonial.text}"</p>
-            <div class="flex justify-center mb-2">
-              ${Array.from({ length: 5 })
-                .map((_, i) => {
-                  return i < testimonial.rating
-                    ? `<i class="fas fa-star text-yellow-500"></i>`
-                    : `<i class="far fa-star text-gray-300"></i>`;
-                })
-                .join("")}
-            </div>
-            <span class="block text-gray-800 font-semibold text-sm">
-              - ${testimonial.name}
-            </span>
-          </div>
-        `
-        )
-        .join("")}
-    </div>
-    <div class="text-center mt-8">
-      <button
-        id="submitTestimonialBtn"
-        class="px-6 py-3 bg-primary text-white font-bold rounded-lg shadow-md hover:bg-yellow-600 transition"
-      >
-        Submit Your Testimonial
-      </button>
-    </div>
-  `;
-
-  // Add fade-in effect
-  const testimonialItems = document.querySelectorAll(".testimonial-item");
-  testimonialItems.forEach((item, index) => {
-    setTimeout(() => {
-      item.classList.remove("opacity-0", "translate-y-10");
-    }, index * 200); // Staggered fade-in
   });
 }
 

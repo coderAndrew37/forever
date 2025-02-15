@@ -5,13 +5,10 @@ import {
   renderProducts,
   renderPagination,
   renderFAQs,
-  renderTestimonials,
   renderSpecialOffers,
-  renderPacks,
 } from "./utils/renderUtils.js";
 
 import { faqs } from "./data/faqsData.js";
-import { testimonials } from "./data/testimonialsData.js";
 import { specialOffers } from "./data/specialOffersData.js";
 import { isAuthenticated, initAddToCartListeners } from "./utils/cartUtils.js";
 import "./authButton.js";
@@ -20,6 +17,8 @@ import "./categoryNav.js";
 import "./sidebar.js";
 import "./newsletter.js";
 import "./featuredTestimonials.js";
+import "./testimonials.js";
+import "./submitTestimonials.js";
 
 let currentPage = 1;
 let totalPages = 1;
@@ -32,13 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   fetchAndDisplayProducts(currentPage, authenticated);
   renderFAQs(faqs);
-  renderTestimonials(testimonials);
   renderSpecialOffers(specialOffers);
-  renderPacks(".js-packs-grid");
-
-  // Render special offers using the new API
-  const offersApiEndpoint = "/api/offers";
-  renderSpecialOffers(offersApiEndpoint, ".special-offers-section");
 });
 
 // Fetch and display products

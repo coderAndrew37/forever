@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="/styles/shared/general.css" />
     <link rel="stylesheet" href="/styles/pages/amazon.css" />
     <link rel="stylesheet" href="/styles/shared/sidebar-animations.css" />
+    <link rel="stylesheet" href="/styles/shared/toast.css" />
   </head>
   <body>
     <!-- 🏷️ Main Navigation (Contains Home, About, Contact, etc.) -->
@@ -239,28 +240,103 @@
         <!-- Search results will be rendered here -->
       </div>
 
+      <!-- Testimonials Section -->
       <section class="testimonials-section py-16 px-5 bg-gray-100">
-        <h2 class="text-center text-4xl font-bold text-gray-800 mb-10">
-          What Our Customers Say
-        </h2>
-        <p class="text-center text-lg text-gray-600 mb-6 max-w-3xl mx-auto">
-          Real stories from our satisfied customers who have transformed their
-          health with Forever Living Products.
-        </p>
-        <div
-          class="testimonials-grid grid gap-6 text-center md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1"
-        >
-          <!-- Dynamic content will be rendered here -->
+        <div class="max-w-6xl mx-auto text-center">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4">
+            What Our Customers Say
+          </h2>
+          <p class="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
+            Real stories from satisfied customers who have transformed their
+            health with Forever Living Products.
+          </p>
         </div>
-        <div class="text-center mt-8">
+
+        <div class="relative max-w-5xl mx-auto">
+          <div class="swiper testimonials-slider">
+            <div class="swiper-wrapper"></div>
+          </div>
+          <div class="flex justify-center mt-6 space-x-4">
+            <button
+              class="swiper-button-prev bg-yellow-500 text-white px-4 py-2 rounded-full shadow-md hover:bg-yellow-600"
+            >
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <button
+              class="swiper-button-next bg-yellow-500 text-white px-4 py-2 rounded-full shadow-md hover:bg-yellow-600"
+            >
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="text-center mt-10">
           <button
-            id="submitTestimonialBtn"
+            id="openTestimonialModal"
             class="px-6 py-3 bg-yellow-500 text-white font-bold rounded-lg shadow-md hover:bg-yellow-600 transition"
           >
             Submit Your Testimonial
           </button>
         </div>
       </section>
+
+      <!-- Testimonial Modal -->
+      <div
+        id="testimonialModal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden"
+      >
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+          <h3 class="text-xl font-bold mb-4">Submit Your Testimonial</h3>
+
+          <!-- ✅ Added Form Wrapper -->
+          <form id="testimonialForm" class="space-y-4">
+            <input
+              id="testimonialName"
+              type="text"
+              placeholder="Your Name"
+              class="block w-full p-2 border rounded-md"
+              required
+            />
+            <textarea
+              id="testimonialText"
+              placeholder="Your Testimonial"
+              class="block w-full p-2 border rounded-md"
+              required
+            ></textarea>
+            <input id="testimonialPhoto" type="file" class="block w-full p-2" />
+            <select
+              id="testimonialRating"
+              class="block w-full p-2 border rounded-md"
+            >
+              <option value="5">⭐⭐⭐⭐⭐ - 5 Stars</option>
+              <option value="4">⭐⭐⭐⭐ - 4 Stars</option>
+              <option value="3">⭐⭐⭐ - 3 Stars</option>
+            </select>
+
+            <button
+              id="submitTestimonial"
+              class="w-full bg-yellow-500 text-white px-4 py-2 rounded-md"
+            >
+              Submit
+            </button>
+            <button
+              id="closeTestimonialModal"
+              type="button"
+              class="w-full text-red-500 mt-2"
+            >
+              Cancel
+            </button>
+          </form>
+
+          <!-- ✅ Success Message (Initially Hidden) -->
+          <p
+            id="testimonialSuccess"
+            class="hidden text-green-600 text-center mt-4"
+          >
+            ✅ Testimonial submitted successfully!
+          </p>
+        </div>
+      </div>
 
       <!-- Featured Testimonials Stories -->
       <section
@@ -344,6 +420,11 @@
       <i class="fab fa-whatsapp"></i>
       <span class="whatsapp-tooltip">Chat with Me!</span>
     </a>
+
+    <div
+      id="toast-container"
+      class="fixed bottom-5 right-5 space-y-3 z-50"
+    ></div>
 
     <!-- Professional Footer-Sitemap -->
     <footer class="bg-gray-900 text-white py-12">
