@@ -90,3 +90,11 @@
 {"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T09:58:40.307Z"}
 {"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T10:09:14.387Z"}
 {"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T10:09:14.416Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T10:15:47.121Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T10:15:47.155Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T10:17:04.147Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T10:17:04.164Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T10:21:35.578Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T10:21:35.627Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T10:21:52.265Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T10:21:52.286Z"}

@@ -10,6 +10,9 @@
       rel="stylesheet"
     />
 
+    <!-- ffmpeg CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ffmpeg.js/0.10.1/ffmpeg.min.js"></script>
+
     <link rel="stylesheet" href="/styles/tailwind.css" />
 
     <link
@@ -283,81 +286,64 @@
       <!-- Testimonial Modal (Always on Top) -->
       <div
         id="testimonialModal"
-        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-[9999] pointer-events-auto"
+        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50"
       >
         <div
-          class="bg-white p-6 rounded-lg shadow-2xl max-w-md w-full max-h-screen overflow-y-auto"
+          class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full overflow-y-auto max-h-[90vh]"
         >
-          <h3 class="text-xl font-bold mb-4 text-center">
-            Submit Your Testimonial
-          </h3>
+          <h3 class="text-xl font-bold mb-4">Submit Your Testimonial</h3>
 
           <!-- ✅ Form Wrapper -->
           <form id="testimonialForm" class="space-y-4">
-            <!-- Name Field -->
-            <label
-              for="testimonialName"
-              class="block text-sm font-medium text-gray-700"
-            >
-              Your Name
-            </label>
             <input
               id="testimonialName"
               type="text"
-              placeholder="John Doe"
+              placeholder="Your Name"
               class="block w-full p-2 border rounded-md"
               required
             />
-
-            <!-- Testimonial Text -->
-            <label
-              for="testimonialText"
-              class="block text-sm font-medium text-gray-700"
-            >
-              Your Testimonial
-            </label>
             <textarea
               id="testimonialText"
-              placeholder="Write your experience..."
+              placeholder="Your Testimonial"
               class="block w-full p-2 border rounded-md"
               required
             ></textarea>
 
-            <!-- Photo Upload -->
-            <label
-              for="testimonialPhoto"
-              class="block text-sm font-medium text-gray-700"
+            <!-- ✅ Photo Upload -->
+            <label class="block text-gray-700 font-medium"
+              >Upload a Photo (Max: 5MB)</label
             >
-              Upload a Photo (Optional)
-            </label>
             <input
               id="testimonialPhoto"
               type="file"
-              accept="image/*"
               class="block w-full p-2 border rounded-md"
             />
 
-            <!-- Video Upload -->
-            <label
-              for="testimonialVideo"
-              class="block text-sm font-medium text-gray-700"
+            <!-- ✅ Video Upload -->
+            <label class="block text-gray-700 font-medium"
+              >Upload a Video (Max: 50MB)</label
             >
-              Upload a Video (Optional)
-            </label>
             <input
               id="testimonialVideo"
               type="file"
-              accept="video/*"
               class="block w-full p-2 border rounded-md"
             />
 
-            <!-- Rating Selection -->
-            <label
-              for="testimonialRating"
-              class="block text-sm font-medium text-gray-700"
-            >
-              Rate Us
-            </label>
+            <!-- ✅ Video Preview -->
+            <div id="videoPreviewContainer" class="hidden mt-4">
+              <video
+                id="videoPreview"
+                controls
+                class="w-full rounded-lg shadow-md"
+              ></video>
+              <button
+                id="removeVideo"
+                class="mt-2 bg-red-500 text-white px-4 py-1 rounded"
+              >
+                Remove Video
+              </button>
+            </div>
+
             <select
               id="testimonialRating"
               class="block w-full p-2 border rounded-md"
@@ -367,10 +353,9 @@
               <option value="3">⭐⭐⭐ - 3 Stars</option>
             </select>
 
-            <!-- Submit & Cancel Buttons -->
             <button
               id="submitTestimonial"
-              class="w-full bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600"
+              class="w-full bg-yellow-500 text-white px-4 py-2 rounded-md"
             >
               Submit
             </button>
@@ -382,14 +367,6 @@
               Cancel
             </button>
           </form>
-
-          <!-- ✅ Success Message (Initially Hidden) -->
-          <p
-            id="testimonialSuccess"
-            class="hidden text-green-600 text-center mt-4"
-          >
-            ✅ Testimonial submitted successfully!
-          </p>
         </div>
       </div>
 
