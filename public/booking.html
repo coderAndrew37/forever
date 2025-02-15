@@ -17,6 +17,7 @@
         Get expert advice on infertility issues.
       </p>
 
+      <!-- ✅ Booking Form -->
       <form id="bookingForm" class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700"
@@ -25,7 +26,7 @@
           <input
             type="text"
             id="name"
-            class="w-full px-4 py-2 border rounded-md focus:ring-yellow-500 focus:border-yellow-500"
+            class="input-field"
             placeholder="John Doe"
             required
           />
@@ -36,7 +37,7 @@
           <input
             type="email"
             id="email"
-            class="w-full px-4 py-2 border rounded-md focus:ring-yellow-500 focus:border-yellow-500"
+            class="input-field"
             placeholder="example@email.com"
             required
           />
@@ -49,7 +50,7 @@
           <input
             type="tel"
             id="phone"
-            class="w-full px-4 py-2 border rounded-md focus:ring-yellow-500 focus:border-yellow-500"
+            class="input-field"
             placeholder="+254 700 000 000"
             required
           />
@@ -59,19 +60,14 @@
           <label class="block text-sm font-medium text-gray-700"
             >Preferred Date</label
           >
-          <input
-            type="date"
-            id="date"
-            class="w-full px-4 py-2 border rounded-md focus:ring-yellow-500 focus:border-yellow-500"
-            required
-          />
+          <input type="date" id="date" class="input-field" required />
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700">Message</label>
           <textarea
             id="message"
-            class="w-full px-4 py-2 border rounded-md focus:ring-yellow-500 focus:border-yellow-500"
+            class="input-field"
             placeholder="Briefly describe your issue..."
             rows="4"
             required
@@ -86,11 +82,11 @@
         </button>
       </form>
 
-      <!-- WhatsApp Consultation Button -->
+      <!-- ✅ WhatsApp Button -->
       <div class="mt-6 text-center">
         <a
           href="https://wa.me/254746577838?text=Hi,%20I%20need%20help%20with%20an%20infertility%20issue."
-          class="bg-green-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-600"
+          class="whatsapp-btn"
         >
           Chat on WhatsApp
         </a>
@@ -98,5 +94,34 @@
     </div>
 
     <script src="/scripts/booking.js" type="module"></script>
+
+    <!-- ✅ Tailwind Styles -->
+    <style>
+      .input-field {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        transition: border 0.3s ease;
+      }
+      .input-field:focus {
+        border-color: #fbbf24;
+        outline: none;
+        box-shadow: 0 0 5px rgba(251, 191, 36, 0.5);
+      }
+      .whatsapp-btn {
+        background-color: #25d366;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-weight: bold;
+        display: inline-block;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background 0.3s;
+      }
+      .whatsapp-btn:hover {
+        background-color: #1ebf5c;
+      }
+    </style>
   </body>
 </html>
