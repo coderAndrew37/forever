@@ -280,30 +280,84 @@
         </div>
       </section>
 
-      <!-- Testimonial Modal -->
+      <!-- Testimonial Modal (Always on Top) -->
       <div
         id="testimonialModal"
-        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden"
+        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-[9999] pointer-events-auto"
       >
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-          <h3 class="text-xl font-bold mb-4">Submit Your Testimonial</h3>
+        <div
+          class="bg-white p-6 rounded-lg shadow-2xl max-w-md w-full max-h-screen overflow-y-auto"
+        >
+          <h3 class="text-xl font-bold mb-4 text-center">
+            Submit Your Testimonial
+          </h3>
 
-          <!-- ✅ Added Form Wrapper -->
+          <!-- ✅ Form Wrapper -->
           <form id="testimonialForm" class="space-y-4">
+            <!-- Name Field -->
+            <label
+              for="testimonialName"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Your Name
+            </label>
             <input
               id="testimonialName"
               type="text"
-              placeholder="Your Name"
+              placeholder="John Doe"
               class="block w-full p-2 border rounded-md"
               required
             />
+
+            <!-- Testimonial Text -->
+            <label
+              for="testimonialText"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Your Testimonial
+            </label>
             <textarea
               id="testimonialText"
-              placeholder="Your Testimonial"
+              placeholder="Write your experience..."
               class="block w-full p-2 border rounded-md"
               required
             ></textarea>
-            <input id="testimonialPhoto" type="file" class="block w-full p-2" />
+
+            <!-- Photo Upload -->
+            <label
+              for="testimonialPhoto"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Upload a Photo (Optional)
+            </label>
+            <input
+              id="testimonialPhoto"
+              type="file"
+              accept="image/*"
+              class="block w-full p-2 border rounded-md"
+            />
+
+            <!-- Video Upload -->
+            <label
+              for="testimonialVideo"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Upload a Video (Optional)
+            </label>
+            <input
+              id="testimonialVideo"
+              type="file"
+              accept="video/*"
+              class="block w-full p-2 border rounded-md"
+            />
+
+            <!-- Rating Selection -->
+            <label
+              for="testimonialRating"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Rate Us
+            </label>
             <select
               id="testimonialRating"
               class="block w-full p-2 border rounded-md"
@@ -313,9 +367,10 @@
               <option value="3">⭐⭐⭐ - 3 Stars</option>
             </select>
 
+            <!-- Submit & Cancel Buttons -->
             <button
               id="submitTestimonial"
-              class="w-full bg-yellow-500 text-white px-4 py-2 rounded-md"
+              class="w-full bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600"
             >
               Submit
             </button>

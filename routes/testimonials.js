@@ -3,14 +3,14 @@ const { Testimonial, validateTestimonial } = require("../models/testimonial");
 const multer = require("multer");
 const router = express.Router();
 
-// ✅ Multer Setup for Image Uploads
+// ✅ Multer Storage Setup for Images & Videos
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
   filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
 });
 const upload = multer({ storage });
 
-// ✅ Get Testimonials (Only 3★ and Above, Approved, Sorted by Likes)
+// ✅ Get Testimonials (Only Approved, 3★ and Above)
 router.get("/", async (req, res) => {
   try {
     const testimonials = await Testimonial.find({
@@ -26,25 +26,31 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ✅ Submit a New Testimonial with Optional Photo Upload
-router.post("/", upload.single("photo"), async (req, res) => {
-  try {
-    const { error, value } = validateTestimonial(req.body);
-    if (error) return res.status(400).json({ error: error.details[0].message });
+// ✅ Submit a New Testimonial (With Image/Video Upload)
+router.post(
+  "/",
+  upload.fields([{ name: "photo" }, { name: "video" }]),
+  async (req, res) => {
+    try {
+      const { error, value } = validateTestimonial(req.body);
+      if (error)
+        return res.status(400).json({ error: error.details[0].message });
 
-    const testimonial = new Testimonial({
-      ...value,
-      photo: req.file ? `/uploads/${req.file.filename}` : "",
-    });
-    await testimonial.save();
-    res
-      .status(201)
-      .json({ message: "Testimonial submitted. Pending approval!" });
-  } catch (error) {
-    console.error("Error submitting testimonial:", error);
-    res.status(500).json({ error: "Failed to submit testimonial." });
+      const testimonial = new Testimonial({
+        ...value,
+        photo: req.files.photo ? `/uploads/${req.files.photo[0].filename}` : "",
+        video: req.files.video ? `/uploads/${req.files.video[0].filename}` : "",
+      });
+      await testimonial.save();
+      res
+        .status(201)
+        .json({ message: "Testimonial submitted. Pending approval!" });
+    } catch (error) {
+      console.error("Error submitting testimonial:", error);
+      res.status(500).json({ error: "Failed to submit testimonial." });
+    }
   }
-});
+);
 
 // ✅ Like a Testimonial
 router.post("/:id/like", async (req, res) => {

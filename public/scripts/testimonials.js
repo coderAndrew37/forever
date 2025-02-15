@@ -1,7 +1,7 @@
 import { baseUrl } from "./constants.js";
 
 // ✅ Fetch & Render Testimonials (Only 3★ and Above)
-export async function fetchTestimonials() {
+async function fetchTestimonials() {
   try {
     const response = await fetch(`${baseUrl}/api/testimonials`);
     const testimonials = await response.json();
@@ -11,7 +11,7 @@ export async function fetchTestimonials() {
   }
 }
 
-// ✅ Render Testimonials in Swiper
+// ✅ Render Testimonials with Swiper
 function renderTestimonials(testimonials) {
   const swiperContainer = document.querySelector(".swiper-wrapper");
   if (!swiperContainer) return;
@@ -35,13 +35,42 @@ function renderTestimonials(testimonials) {
         </span>
         ${
           t.photo
-            ? `<img src="${t.photo}" alt="User photo" class="mt-2 w-16 h-16 rounded-full mx-auto" />`
+            ? `<img src="${t.photo}" class="mt-2 w-16 h-16 rounded-full mx-auto" />`
             : ""
         }
+        ${
+          t.video
+            ? `<video class="mt-4 mx-auto w-full rounded-lg" controls>
+                 <source src="${t.video}" type="video/mp4">
+               </video>`
+            : ""
+        }
+        <button 
+          class="like-btn bg-yellow-500 text-white px-4 py-2 mt-4 rounded-md hover:bg-yellow-600"
+          data-id="${t._id}"
+        >
+          Like ❤️ (${t.likes})
+        </button>
       </div>
     `
     )
     .join("");
+
+  // ✅ Like Functionality
+  document.querySelectorAll(".like-btn").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const id = button.getAttribute("data-id");
+      try {
+        const response = await fetch(`${baseUrl}/api/testimonials/${id}/like`, {
+          method: "POST",
+        });
+        const result = await response.json();
+        button.innerHTML = `Like ❤️ (${result.likes})`;
+      } catch (error) {
+        console.error("Error liking testimonial:", error);
+      }
+    });
+  });
 
   // ✅ Initialize Swiper
   new Swiper(".testimonials-slider", {
