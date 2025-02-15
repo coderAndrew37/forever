@@ -3,32 +3,95 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Panel - Manage Orders</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="/styles/tailwind.css" />
-  </head>
-  <body class="bg-gray-100 font-roboto">
-    <div class="max-w-7xl mx-auto p-4">
-      <h1 class="text-2xl font-bold text-gray-700">
-        Admin Panel - Manage Orders
-      </h1>
-
-      <!-- Orders Table -->
-      <div class="mt-6 bg-white shadow-md rounded-lg overflow-hidden">
-        <table class="w-full border-collapse border border-gray-200">
-          <thead class="bg-gray-100">
-            <tr>
-              <th class="border border-gray-200 px-4 py-2">Order ID</th>
-              <th class="border border-gray-200 px-4 py-2">Customer</th>
-              <th class="border border-gray-200 px-4 py-2">Total</th>
-              <th class="border border-gray-200 px-4 py-2">Status</th>
-              <th class="border border-gray-200 px-4 py-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="ordersTable" class="text-gray-700"></tbody>
-        </table>
-      </div>
-    </div>
-
     <script type="module" src="/scripts/admin.js"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <!-- ✅ Admin Navbar -->
+    <header class="bg-gray-900 text-white py-4">
+      <div class="max-w-7xl mx-auto flex justify-between items-center px-6">
+        <h1 class="text-xl font-bold">Admin Dashboard</h1>
+        <button id="logoutBtn" class="bg-red-500 px-4 py-2 rounded">
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <!-- ✅ Main Admin Panel -->
+    <main class="max-w-7xl mx-auto py-10 px-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Admin Overview</h2>
+
+      <!-- ✅ Stats Section -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-lg font-semibold text-gray-600">Total Orders</h3>
+          <p id="totalOrders" class="text-2xl font-bold text-gray-900">0</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-lg font-semibold text-gray-600">Total Revenue</h3>
+          <p id="totalRevenue" class="text-2xl font-bold text-green-600">
+            KSH 0
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-lg font-semibold text-gray-600">
+            Pending Testimonials
+          </h3>
+          <p
+            id="pendingTestimonials"
+            class="text-2xl font-bold text-yellow-500"
+          >
+            0
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-lg font-semibold text-gray-600">Total Users</h3>
+          <p id="totalUsers" class="text-2xl font-bold text-gray-900">0</p>
+        </div>
+      </div>
+
+      <!-- ✅ Quick Management Links -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a
+          href="/admin-orders.html"
+          class="bg-blue-500 text-white p-6 rounded-lg shadow-md hover:bg-blue-600 transition"
+        >
+          <h3 class="text-lg font-bold">Manage Orders</h3>
+          <p class="text-sm opacity-80">View and update customer orders</p>
+        </a>
+        <a
+          href="/admin-testimonials.html"
+          class="bg-yellow-500 text-white p-6 rounded-lg shadow-md hover:bg-yellow-600 transition"
+        >
+          <h3 class="text-lg font-bold">Manage Testimonials</h3>
+          <p class="text-sm opacity-80">Approve or reject testimonials</p>
+        </a>
+        <a
+          href="/admin-products.html"
+          class="bg-green-500 text-white p-6 rounded-lg shadow-md hover:bg-green-600 transition"
+        >
+          <h3 class="text-lg font-bold">Manage Products</h3>
+          <p class="text-sm opacity-80">Add, edit, or remove products</p>
+        </a>
+      </div>
+    </main>
+
+    <!-- ✅ Logout Script -->
+    <script>
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", async () => {
+          try {
+            await fetch("/api/users/logout", {
+              method: "POST",
+              credentials: "include",
+            });
+            window.location.href = "/login.html";
+          } catch (error) {
+            alert("Logout failed. Please try again.");
+          }
+        });
+    </script>
   </body>
 </html>

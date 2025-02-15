@@ -11,6 +11,8 @@ const packs = require("../routes/packs.js");
 const offers = require("../routes/offers.js");
 const booking = require("../routes/booking.js");
 const testimonials = require("../routes/testimonials.js");
+const admin = require("../routes/admin.js"); // ✅ Added Admin Route
+
 module.exports = function (app) {
   app.use("/api/products", products);
   app.use("/api/users", auth);
@@ -18,11 +20,12 @@ module.exports = function (app) {
   app.use("/api/password-reset", passwordReset);
   app.use("/api/faqs", faqs);
   app.use("/api/contacts", contacts);
-  app.use("/api/submit-quiz", quiz); // Added the quiz route
-  app.use("/api/newsletter", newsletter); // Added the newsletter route
+  app.use("/api/submit-quiz", quiz);
+  app.use("/api/newsletter", newsletter);
   app.use("/api/orders", orders);
   app.use("/api/packs", packs);
   app.use("/api/offers", offers);
   app.use("/api/bookings", booking);
   app.use("/api/testimonials", testimonials);
+  app.use("/api/admin", admin); // ✅ Now the admin panel API is accessible
 };

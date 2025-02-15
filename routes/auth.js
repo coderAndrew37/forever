@@ -115,9 +115,18 @@ router.post("/login", loginLimiter, async (req, res) => {
 // Protected Profile Route
 router.get("/profile", authMiddleware, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select("name email");
-    res.json(user);
+    console.log("Fetching profile for user ID:", req.user.userId); // Debugging
+    const user = await User.findById(req.user.userId).select(
+      "name email isAdmin"
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ name: user.name, email: user.email, isAdmin: user.isAdmin });
   } catch (error) {
+    console.error("Error fetching profile:", error);
     res.status(500).json({ message: "Server error" });
   }
 });

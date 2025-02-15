@@ -1,99 +1,55 @@
 import { baseUrl } from "./constants.js";
+import { showToast } from "./utils/toast.js";
 
-async function fetchOrders() {
+// ✅ Check Admin Authentication
+async function checkAdminAccess() {
   try {
-    console.log("Fetching admin orders..."); // Debug log
-    const response = await fetch(`${baseUrl}/api/orders/admin`, {
+    const response = await fetch(`${baseUrl}/api/users/profile`, {
       method: "GET",
-      credentials: "include", // Ensure cookies are sent
+      credentials: "include",
     });
 
-    console.log("Fetch Response Status:", response.status); // Debug log
+    if (!response.ok) throw new Error("Unauthorized");
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch orders.");
-    }
+    const user = await response.json();
+    if (!user.isAdmin) throw new Error("Not an admin");
 
-    const orders = await response.json();
-    console.log("Orders fetched:", orders); // Debug log
-    renderOrders(orders);
+    return true;
   } catch (error) {
-    console.error("Error fetching orders:", error.message); // Debug log
+    console.error("Admin access denied:", error);
+    window.location.href = "/login.html"; // Redirect non-admins
+    return false;
   }
 }
 
-function renderOrders(orders) {
-  const tableBody = document.getElementById("ordersTable");
-  tableBody.innerHTML = orders
-    .map(
-      (order) => `
-    <tr>
-      <td class="border border-gray-200 px-4 py-2">${order._id}</td>
-      <td class="border border-gray-200 px-4 py-2">${order.name}</td>
-      <td class="border border-gray-200 px-4 py-2">
-        KSH ${(order.totalCents / 100).toLocaleString("en-KE")}
-      </td>
-      <td class="border border-gray-200 px-4 py-2">
-        <select
-          data-order-id="${order._id}"
-          class="status-select bg-gray-50 border border-gray-200 rounded px-2 py-1"
-        >
-          <option value="Preparing" ${
-            order.status === "Preparing" ? "selected" : ""
-          }>Preparing</option>
-          <option value="Shipped" ${
-            order.status === "Shipped" ? "selected" : ""
-          }>Shipped</option>
-          <option value="Delivered" ${
-            order.status === "Delivered" ? "selected" : ""
-          }>Delivered</option>
-        </select>
-      </td>
-      <td class="border border-gray-200 px-4 py-2">
-        <button
-          data-order-id="${order._id}"
-          class="update-btn text-white bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded"
-        >
-          Update
-        </button>
-      </td>
-    </tr>
-  `
-    )
-    .join("");
-
-  attachEventListeners();
-}
-
-function attachEventListeners() {
-  document.querySelectorAll(".update-btn").forEach((button) => {
-    button.addEventListener("click", async (event) => {
-      const orderId = event.target.dataset.orderId;
-      const statusSelect = document.querySelector(
-        `.status-select[data-order-id="${orderId}"]`
-      );
-
-      try {
-        const response = await fetch(`${baseUrl}/api/orders/admin/${orderId}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ status: statusSelect.value }),
-          credentials: "include",
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to update order.");
-        }
-
-        alert("Order updated successfully!");
-        fetchOrders(); // Refresh the orders table
-      } catch (error) {
-        console.error("Error updating order:", error);
-        alert("Failed to update order. Please try again.");
-      }
+// ✅ Fetch Dashboard Stats
+async function fetchAdminStats() {
+  try {
+    const response = await fetch(`${baseUrl}/api/admin/stats`, {
+      method: "GET",
+      credentials: "include",
     });
-  });
+
+    if (!response.ok) throw new Error("Failed to fetch stats");
+
+    const { totalOrders, totalRevenue, pendingTestimonials, totalUsers } =
+      await response.json();
+
+    document.getElementById("totalOrders").textContent = totalOrders;
+    document.getElementById(
+      "totalRevenue"
+    ).textContent = `KSH ${totalRevenue.toLocaleString()}`;
+    document.getElementById("pendingTestimonials").textContent =
+      pendingTestimonials;
+    document.getElementById("totalUsers").textContent = totalUsers;
+  } catch (error) {
+    console.error("Error fetching admin stats:", error);
+    showToast("Failed to load stats", "error");
+  }
 }
 
-// Fetch orders on page load
-document.addEventListener("DOMContentLoaded", fetchOrders);
+// ✅ Initialize Admin Panel
+document.addEventListener("DOMContentLoaded", async () => {
+  const isAdmin = await checkAdminAccess();
+  if (isAdmin) fetchAdminStats();
+});

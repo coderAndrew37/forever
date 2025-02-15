@@ -1,26 +1,20 @@
 const jwt = require("jsonwebtoken");
-
-// Use environment variables or provide fallback secrets
 const jwtSecret = process.env.JWT_SECRET || "your_jwt_secret";
 
-/**
- * Middleware to verify if the user is authenticated.
- * Validates the access token from cookies.
- */
 function authMiddleware(req, res, next) {
-  const token = req.cookies.access_token;
+  const token = req.cookies.access_token; // Using cookies
 
   if (!token) {
-    console.log("authMiddleware: Token is missing"); // Debug log
+    console.log("authMiddleware: Token is missing");
     return res.status(401).json({ message: "Unauthorized. Token is missing." });
   }
 
   try {
     const decoded = jwt.verify(token, jwtSecret);
-    req.user = { userId: decoded.userId };
+    req.user = { userId: decoded.userId }; // Attach userId properly
     next();
   } catch (error) {
-    console.error("authMiddleware: Token verification failed:", error.message); // Debug log
+    console.error("authMiddleware: Token verification failed:", error.message);
     if (error.name === "TokenExpiredError") {
       return res
         .status(401)
