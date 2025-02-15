@@ -2812,3 +2812,60 @@
 2025-02-14T07:15:08.039Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 2025-02-14T07:23:20.793Z [INFO]: Server running on port 5000
 2025-02-14T07:23:22.321Z [INFO]: Connected to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+2025-02-14T19:56:51.723Z [INFO]: Server running on port 5000
+2025-02-14T19:56:59.428Z [INFO]: Server running on port 5000
+2025-02-14T19:57:28.748Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 querySrv ETIMEOUT _mongodb._tcp.cluster0.fbt1k.mongodb.net
+2025-02-14T19:57:53.790Z [INFO]: Server running on port 5000
+2025-02-14T19:58:16.003Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 querySrv ETIMEOUT _mongodb._tcp.cluster0.fbt1k.mongodb.net
+2025-02-14T19:58:53.986Z [INFO]: Server running on port 5000
+2025-02-14T19:59:16.285Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 queryTxt ETIMEOUT cluster0.fbt1k.mongodb.net
+2025-02-14T21:04:29.015Z [INFO]: Server running on port 5000
+2025-02-14T21:04:53.524Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 querySrv ETIMEOUT _mongodb._tcp.cluster0.fbt1k.mongodb.net
+2025-02-15T07:01:05.473Z [INFO]: Server running on port 5000
+2025-02-15T07:01:26.666Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 querySrv ETIMEOUT _mongodb._tcp.cluster0.fbt1k.mongodb.net
+2025-02-15T07:04:12.827Z [INFO]: Server running on port 5000
+2025-02-15T07:04:35.001Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 querySrv ETIMEOUT _mongodb._tcp.cluster0.fbt1k.mongodb.net
+2025-02-15T07:05:10.121Z [INFO]: Server running on port 5000
+2025-02-15T07:05:39.367Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 querySrv ETIMEOUT _mongodb._tcp.cluster0.fbt1k.mongodb.net
+2025-02-15T07:07:17.208Z [INFO]: Server running on port 5000
+2025-02-15T07:07:44.451Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 querySrv ETIMEOUT _mongodb._tcp.cluster0.fbt1k.mongodb.net
+2025-02-15T07:13:37.162Z [INFO]: Server running on port 5000
+2025-02-15T07:14:04.433Z [ERROR]: Could not connect to MongoDB at mongodb+srv://forever:ruXb6O7xAjcSC70m@cluster0.fbt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 querySrv ETIMEOUT _mongodb._tcp.cluster0.fbt1k.mongodb.net
+2025-02-15T07:16:12.520Z [INFO]: Server running on port 5000
+2025-02-15T07:16:12.592Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:24:37.100Z [ERROR]: Expected property name or '}' in JSON at position 3 (line 2 column 1) Expected property name or '}' in JSON at position 3 (line 2 column 1)
+2025-02-15T07:29:41.412Z [INFO]: Server running on port 5000
+2025-02-15T07:29:41.445Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:30:27.011Z [INFO]: Server running on port 5000
+2025-02-15T07:30:27.043Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:31:32.227Z [INFO]: Server running on port 5000
+2025-02-15T07:31:32.265Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:32:30.365Z [INFO]: Server running on port 5000
+2025-02-15T07:32:30.394Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:34:06.530Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:34:29.953Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:37:39.392Z [INFO]: Server running on port 5000
+2025-02-15T07:37:39.415Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:39:49.421Z [INFO]: Server running on port 5000
+2025-02-15T07:39:49.444Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:44:53.595Z [INFO]: Server running on port 5000
+2025-02-15T07:44:53.612Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:46:18.023Z [INFO]: Server running on port 5000
+2025-02-15T07:46:18.044Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:46:29.606Z [INFO]: Server running on port 5000
+2025-02-15T07:46:29.628Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:47:14.224Z [INFO]: Server running on port 5000
+2025-02-15T07:47:14.245Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:47:51.251Z [INFO]: Server running on port 5000
+2025-02-15T07:47:51.292Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:50:03.796Z [INFO]: Server running on port 5000
+2025-02-15T07:50:03.833Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:50:42.441Z [INFO]: Server running on port 5000
+2025-02-15T07:50:42.638Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:54:21.181Z [INFO]: Server running on port 5000
+2025-02-15T07:54:21.206Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:55:17.201Z [INFO]: Server running on port 5000
+2025-02-15T07:55:17.230Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:56:04.655Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:56:39.377Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living
+2025-02-15T07:59:08.898Z [INFO]: Connected to MongoDB at mongodb://localhost:27017/forever-living

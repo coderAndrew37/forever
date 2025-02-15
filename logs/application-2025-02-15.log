@@ -1,0 +1,15 @@
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T08:01:04.392Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T08:04:22.896Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T08:04:22.918Z"}
+{"level":"info","message":"New booking from ::1: {\"name\":\"John Doe\",\"email\":\"omolloandrew37@gmail.com\",\"phone\":\"+254712345678\",\"date\":\"2025-03-15\",\"message\":\"I need a consultation about infertility treatment options.\"}","timestamp":"2025-02-15T08:04:51.805Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T08:09:02.223Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T08:09:02.255Z"}
+{"level":"error","message":"Error sending email: booking is not defined","timestamp":"2025-02-15T08:11:13.848Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T08:12:25.571Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T08:12:25.606Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T08:15:29.978Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T08:15:30.005Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T08:15:47.377Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T08:15:47.419Z"}
+{"level":"info","message":"📌 Booking saved: {\"name\":\"John Doe\",\"email\":\"omolloandrew37@gmail.com\",\"phone\":\"+254712345678\",\"date\":\"2025-03-15T00:00:00.000Z\",\"message\":\"I need a consultation about infertility treatment options.\",\"_id\":\"67b04d3858c3fd1b56220cc1\",\"createdAt\":\"2025-02-15T08:15:52.174Z\",\"__v\":0}","timestamp":"2025-02-15T08:15:52.187Z"}
+{"level":"info","message":"📩 Emails sent successfully to omolloandrew37@gmail.com and admin.","timestamp":"2025-02-15T08:15:55.531Z"}
