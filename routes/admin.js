@@ -2,7 +2,7 @@ const express = require("express");
 const authMiddleware = require("../middleware/auth.js");
 const adminMiddleware = require("../middleware/isAdmin.js");
 const { Order } = require("../models/order.js");
-const { User } = require("../models/user.js");
+const User = require("../models/user.js");
 const { Testimonial } = require("../models/testimonial.js");
 
 const router = express.Router();
@@ -10,19 +10,22 @@ const router = express.Router();
 // ✅ Get Admin Dashboard Stats
 router.get("/stats", authMiddleware, adminMiddleware, async (req, res) => {
   try {
-    // Total Orders & Revenue
-    const orders = await Order.find();
-    const totalOrders = orders.length;
-    const totalRevenue =
-      orders.reduce((sum, order) => sum + order.totalCents, 0) / 100;
+    console.log("Fetching admin stats...");
 
-    // Pending Testimonials
+    // ✅ Fetch Stats Safely
+    const totalOrders = await Order.countDocuments();
+    const totalRevenue =
+      (
+        await Order.aggregate([
+          { $group: { _id: null, total: { $sum: "$totalCents" } } },
+        ])
+      )[0]?.total / 100 || 0;
+
     const pendingTestimonials = await Testimonial.countDocuments({
       approved: false,
     });
 
-    // Total Users
-    const totalUsers = await User.countDocuments();
+    const totalUsers = await User.countDocuments(); // ✅ Should work now
 
     res
       .status(200)
