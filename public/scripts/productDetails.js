@@ -1,13 +1,17 @@
 import { baseUrl } from "./constants.js";
-import { addToCart, updateCartQuantity } from "../data/cart.js";
+import { updateCartQuantity } from "../data/cart.js";
 import { isAuthenticated } from "./utils/cartUtils.js";
+import { initAddToCartListeners } from "./utils/cartUtils.js"; // ✅ Single source of truth
+import { fetchCart } from "./cartPreview.js"; // ✅ Import fetchCart()
+
 import "./authButton.js";
 import "./sidebar.js";
 import "./categoryNav.js";
 import "./cartPreview.js"; // Importing Cart Preview
-import { fetchCart } from "./cartPreview.js"; // ✅ Import `fetchCart`
 
 document.addEventListener("DOMContentLoaded", async () => {
+  initAddToCartListeners(); // ✅ Initialize Add to Cart listeners once
+
   const authenticated = await isAuthenticated();
   if (authenticated) updateCartQuantity();
 
@@ -99,9 +103,7 @@ function renderProductDetails(product) {
           <!-- Add to Cart Button -->
           <button
             class="js-add-to-cart w-full bg-yellow-500 text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition duration-300 ease-in-out disabled:opacity-50"
-            data-product-id="${
-              product._id
-            }"  // ✅ Ensure MongoDB ObjectId is used
+            data-product-id="${product._id}"
           >
             Add to Cart
           </button>
@@ -114,58 +116,6 @@ function renderProductDetails(product) {
       </div>
     </div>
   `;
-
-  // ✅ Restore Add to Cart functionality
-  initAddToCartListener(product._id);
-}
-
-function initAddToCartListener(productId) {
-  const addToCartButton = document.querySelector(".js-add-to-cart");
-
-  if (!addToCartButton) {
-    console.error("❌ Error: Add to Cart button not found.");
-    return;
-  }
-
-  // ✅ Remove any existing event listeners before adding a new one
-  const newButton = addToCartButton.cloneNode(true);
-  addToCartButton.replaceWith(newButton);
-
-  newButton.addEventListener("click", async () => {
-    console.log("🛒 Add to Cart clicked"); // ✅ Debug log
-
-    const quantitySelector = document.getElementById("quantity");
-    const quantity = quantitySelector ? parseInt(quantitySelector.value) : 1;
-
-    const isUserAuthenticated = await isAuthenticated();
-
-    if (!isUserAuthenticated) {
-      const proceedToLogin = confirm(
-        "You must log in to add items to your cart. Would you like to log in now?"
-      );
-      if (proceedToLogin) {
-        window.location.href = "/login.html";
-      } else {
-        showToast("❌ You must log in to add items.", "error");
-      }
-      return;
-    }
-
-    try {
-      newButton.disabled = true;
-      await addToCart(productId, quantity);
-      updateCartQuantity();
-      showToast("✅ Added to cart!", "success");
-
-      // ✅ Fetch updated cart preview after adding to cart
-      await fetchCart();
-    } catch (error) {
-      console.error("❌ Error adding product to cart:", error);
-      showToast("Failed to add item to cart.", "error");
-    } finally {
-      newButton.disabled = false;
-    }
-  });
 }
 
 /** Toast Notification System **/
