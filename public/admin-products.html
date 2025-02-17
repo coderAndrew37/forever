@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Products</title>
+    <link rel="stylesheet" href="/styles/tailwind.css" />
+    <link rel="stylesheet" href="/styles/shared/toast.css">
+    <script type="module" src="/scripts/adminProducts.js"></script>
+
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <header class="bg-gray-900 text-white py-4">
+      <div class="max-w-7xl mx-auto flex justify-between items-center px-6">
+        <h1 class="text-xl font-bold">Manage Products</h1>
+        <a href="/admin.html" class="text-sm text-gray-300 hover:underline"
+          >Back to Dashboard</a
+        >
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-10 px-6">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Product List</h2>
+        <button
+          id="addProductBtn"
+          class="bg-green-500 text-white px-4 py-2 rounded"
+        >
+          Add Product
+        </button>
+      </div>
+
+      <table class="w-full bg-white rounded-lg shadow-md overflow-hidden">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="px-4 py-2">Image</th>
+            <th class="px-4 py-2">Name</th>
+            <th class="px-4 py-2">Price</th>
+            <th class="px-4 py-2">Category</th>
+            <th class="px-4 py-2">On Offer</th>
+            <th class="px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="productsTable" class="text-gray-700"></tbody>
+      </table>
+
+      <!-- ✅ Pagination Controls -->
+<div id="pagination" class="flex justify-center mt-4 space-x-2"></div>
+
+    </main>
+
+    <!-- ✅ Add/Edit Product Modal -->
+    <div
+      id="productModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+    >
+      <div
+        class="bg-white p-6 rounded-lg shadow-lg w-96 max-h-[80vh] overflow-y-auto"
+      >
+        <h3 class="text-lg font-bold mb-4" id="modalTitle">Add Product</h3>
+        <form id="productForm">
+          <label class="block mb-2">Name</label>
+          <input
+            type="text"
+            id="productName"
+            class="w-full border p-2 mb-3"
+            required
+          />
+
+          <label class="block mb-2">Price (KSH)</label>
+          <input
+            type="number"
+            id="productPrice"
+            class="w-full border p-2 mb-3"
+            required
+          />
+
+          <label class="block mb-2">Category</label>
+          <input
+            type="text"
+            id="productCategory"
+            class="w-full border p-2 mb-3"
+            required
+          />
+
+          <label class="block mb-2">Description</label>
+          <textarea
+            id="productDescription"
+            class="w-full border p-2 mb-3"
+            required
+          ></textarea>
+
+          <label class="block mb-2">Usage Instructions</label>
+          <textarea
+            id="productUsage"
+            class="w-full border p-2 mb-3"
+            required
+          ></textarea>
+
+          <label class="block mb-2">Benefits (One per line)</label>
+          <textarea
+            id="productBenefits"
+            class="w-full border p-2 mb-3"
+            placeholder="icon,text\nicon,text"
+          ></textarea>
+
+          <label class="block mb-2">Gallery (Comma-separated URLs)</label>
+          <input
+            type="text"
+            id="productGallery"
+            class="w-full border p-2 mb-3"
+          />
+
+          <label class="block mb-2">Image URL</label>
+          <input
+            type="text"
+            id="productImage"
+            class="w-full border p-2 mb-3"
+            required
+          />
+
+          <label class="block mb-2">Rating (Stars)</label>
+          <input
+            type="number"
+            id="productRatingStars"
+            class="w-full border p-2 mb-3"
+            min="0"
+            max="5"
+            required
+          />
+
+          <label class="block mb-2">Rating (Reviews Count)</label>
+          <input
+            type="number"
+            id="productRatingCount"
+            class="w-full border p-2 mb-3"
+            required
+          />
+
+          <label class="block mb-2">Keywords (Comma-separated)</label>
+          <input
+            type="text"
+            id="productKeywords"
+            class="w-full border p-2 mb-3"
+          />
+
+          <div class="flex items-center gap-2 mb-3">
+            <input type="checkbox" id="productOnOffer" class="mr-2" />
+            <label for="productOnOffer">Is On Offer?</label>
+          </div>
+
+          <div class="flex justify-between">
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              id="closeModalBtn"
+              class="bg-gray-400 px-4 py-2 rounded"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+     <div
+      id="toast-container"
+      class="fixed bottom-5 right-5 space-y-3 z-50"
+    ></div>
+
+    <script>
+      document.getElementById("closeModalBtn").addEventListener("click", () => {
+        document.getElementById("productModal").classList.add("hidden");
+      });
+    </script>
+  </body>
+</html>

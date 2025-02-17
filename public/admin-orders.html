@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Orders</title>
+    <link rel="stylesheet" href="/styles/tailwind.css" />
+    <link rel="stylesheet" href="/styles/shared/toast.css" />
+    <script type="module" src="/scripts/adminOrders.js"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <header class="bg-gray-900 text-white py-4">
+      <div class="max-w-7xl mx-auto flex justify-between items-center px-6">
+        <h1 class="text-xl font-bold">Manage Orders</h1>
+        <a href="/admin.html" class="text-sm text-gray-300 hover:underline"
+          >Back to Dashboard</a
+        >
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-10 px-6">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Orders</h2>
+        <button
+          id="exportOrdersBtn"
+          class="bg-green-500 text-white px-4 py-2 rounded"
+        >
+          Export CSV
+        </button>
+      </div>
+
+      <table class="w-full bg-white rounded-lg shadow-md overflow-hidden">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="px-4 py-2">Order ID</th>
+            <th class="px-4 py-2">Customer</th>
+            <th class="px-4 py-2">Total</th>
+            <th class="px-4 py-2">Status</th>
+            <th class="px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTable" class="text-gray-700"></tbody>
+      </table>
+
+      <div id="pagination" class="flex justify-center mt-6 space-x-2"></div>
+    </main>
+
+    <div
+      id="toast-container"
+      class="fixed bottom-5 right-5 space-y-3 z-50"
+    ></div>
+  </body>
+</html>

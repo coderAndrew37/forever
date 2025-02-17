@@ -159,3 +159,14 @@
 {"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T16:07:38.085Z"}
 {"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T16:08:47.158Z"}
 {"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T16:08:47.176Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T16:18:40.812Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T16:23:48.951Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T16:23:48.975Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T16:57:01.847Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T16:57:02.112Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T17:00:27.855Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T17:00:27.872Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T17:46:30.654Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T17:46:30.670Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-15T17:52:10.601Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-15T17:52:10.620Z"}

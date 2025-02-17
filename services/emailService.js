@@ -13,9 +13,8 @@ async function sendOrderConfirmationEmail(to, order) {
     from: process.env.EMAIL_USER,
     to,
     subject: "Order Confirmation",
-    text: `Hello, ${order.name}. Thank you for your order! Your order is being processed.`,
     html: `<h3>Hello, ${order.name}</h3>
-           <p>Thank you for your order! Your order is being processed and we will update you once it’s shipped.</p>
+           <p>Thank you for your order! It is being processed.</p>
            <p><strong>Order Details:</strong></p>
            <ul>
               ${order.items
@@ -31,8 +30,41 @@ async function sendOrderConfirmationEmail(to, order) {
              2
            )}</strong></p>`,
   };
-
   await transporter.sendMail(mailOptions);
 }
 
-module.exports = sendOrderConfirmationEmail;
+async function sendOrderStatusUpdateEmail(to, order, status, trackingNumber) {
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to,
+    subject: `Order Update - ${status}`,
+    html: `<h3>Hello, ${order.name}</h3>
+           <p>Your order status has been updated to: <strong>${status}</strong>.</p>
+           ${
+             trackingNumber
+               ? `<p>Tracking Number: <strong>${trackingNumber}</strong></p>`
+               : ""
+           }
+           <p>Thank you for shopping with us!</p>`,
+  };
+  await transporter.sendMail(mailOptions);
+}
+
+async function sendOrderCancellationEmail(to, order, reason) {
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to,
+    subject: "Order Cancellation",
+    html: `<h3>Hello, ${order.name}</h3>
+           <p>Unfortunately, your order has been canceled.</p>
+           <p>Reason: <strong>${reason}</strong></p>
+           <p>We apologize for the inconvenience.</p>`,
+  };
+  await transporter.sendMail(mailOptions);
+}
+
+module.exports = {
+  sendOrderConfirmationEmail,
+  sendOrderStatusUpdateEmail,
+  sendOrderCancellationEmail,
+};

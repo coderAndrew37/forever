@@ -1,5 +1,7 @@
 const express = require("express");
 const { Product, validateProduct } = require("../models/product");
+const authMiddleware = require("../middleware/auth");
+const adminMiddleware = require("../middleware/isAdmin");
 const router = express.Router();
 const mongoose = require("mongoose");
 
@@ -146,13 +148,12 @@ router.get("/", async (req, res) => {
 });
 
 // Add the POST route to create a new product
-router.post("/", async (req, res) => {
-  // Validate product data
+// ✅ Add a New Product (Admin Only)
+router.post("/", authMiddleware, adminMiddleware, async (req, res) => {
   const { error } = validateProduct(req.body);
   if (error) return res.status(400).json({ message: error.details[0].message });
 
   try {
-    // Create a new product with validated data
     const product = new Product(req.body);
     await product.save();
 
@@ -160,6 +161,50 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.error("Error adding product:", error);
     res.status(500).json({ message: "Failed to add product" });
+  }
+});
+
+// ✅ Update an Existing Product (Admin Only)
+router.put("/:id", authMiddleware, adminMiddleware, async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: "Invalid product ID." });
+  }
+
+  const { error } = validateProduct(req.body);
+  if (error) return res.status(400).json({ message: error.details[0].message });
+
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    if (!updatedProduct)
+      return res.status(404).json({ error: "Product not found." });
+
+    res.json({ message: "Product updated successfully", updatedProduct });
+  } catch (error) {
+    console.error("Error updating product:", error);
+    res.status(500).json({ message: "Failed to update product." });
+  }
+});
+
+// ✅ Delete a Product (Admin Only)
+router.delete("/:id", authMiddleware, adminMiddleware, async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: "Invalid product ID." });
+  }
+
+  try {
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+    if (!deletedProduct)
+      return res.status(404).json({ error: "Product not found." });
+
+    res.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    res.status(500).json({ message: "Failed to delete product." });
   }
 });
 
