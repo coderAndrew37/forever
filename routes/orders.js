@@ -4,7 +4,7 @@ const authMiddleware = require("../middleware/auth.js");
 const adminMiddleware = require("../middleware/isAdmin.js");
 const { Order, validateOrder } = require("../models/order.js");
 const { Product } = require("../models/product.js");
-const sendOrderConfirmationEmail = require("../services/emailService.js");
+const { sendOrderConfirmationEmail } = require("../services/emailService.js");
 const { Parser } = require("json2csv"); // For CSV Export
 
 const router = express.Router();
