@@ -1,8 +1,4 @@
-import {
-  cartItems,
-  fetchCartItems,
-  updateQuantity,
-} from "./checkoutCartManager.js";
+import { fetchCartItems, updateQuantity } from "./checkoutCartManager.js";
 import {
   prefillOrderForm,
   handleOrderSubmission,
@@ -10,13 +6,21 @@ import {
 import { renderOrderSummary } from "./renderOrderSummary.js";
 import { updateCartQuantity } from "../data/cart.js";
 
+// ✅ Show Skeletons Before Fetching Data
+function showSkeletons() {
+  document.querySelector(".js-order-summary").innerHTML =
+    '<div class="skeleton skeleton-order-summary"></div>';
+  document.querySelector(".js-payment-summary").innerHTML =
+    '<div class="skeleton skeleton-payment-summary"></div>';
+}
+
 async function attachCartEventListeners() {
   document.querySelectorAll(".js-quantity-select").forEach((select) => {
     select.addEventListener("change", async (event) => {
       const productId = event.target.dataset.productId;
       const newQuantity = parseInt(event.target.value, 10);
       await updateQuantity(productId, newQuantity);
-      await renderOrderSummary(cartItems);
+      await renderOrderSummary();
       updateCartQuantity();
     });
   });
@@ -25,7 +29,7 @@ async function attachCartEventListeners() {
     button.addEventListener("click", async (event) => {
       const productId = event.target.dataset.productId;
       await updateQuantity(productId, 0);
-      await renderOrderSummary(cartItems);
+      await renderOrderSummary();
       updateCartQuantity();
     });
   });
@@ -58,17 +62,17 @@ function setupModalListeners() {
   });
 }
 
+// ✅ Initialize on Page Load
 document.addEventListener("DOMContentLoaded", async () => {
+  showSkeletons(); // Show skeletons before loading
+
   await fetchCartItems();
-  await renderOrderSummary(cartItems);
+  await renderOrderSummary();
   updateCartQuantity();
   attachCartEventListeners();
   setupModalListeners();
 
-  const orderForm = document.getElementById("orderDetailsForm");
-  if (orderForm) {
-    orderForm.addEventListener("submit", handleOrderSubmission);
-  } else {
-    console.error("❌ Order form not found! Check your HTML.");
-  }
+  document
+    .getElementById("orderDetailsForm")
+    .addEventListener("submit", handleOrderSubmission);
 });

@@ -33,7 +33,7 @@
           </a>
         </div>
         <div class="checkout-header-middle-section">
-          Checkout (<a class="return-to-home-link" href="/">3 items</a>)
+          Checkout (<a class="return-to-home-link" href="/"></a>)
         </div>
         <div class="checkout-header-right-section">
           <img src="/images/icons/checkout-lock-icon.png" />
@@ -44,8 +44,13 @@
     <div class="main">
       <div class="page-title">Review your order</div>
       <div class="checkout-grid">
-        <div class="order-summary js-order-summary"></div>
-        <div class="payment-summary js-payment-summary"></div>
+        <div class="order-summary js-order-summary">
+          <div class="skeleton skeleton-order-summary"></div>
+        </div>
+
+        <div class="payment-summary js-payment-summary">
+          <div class="skeleton skeleton-payment-summary"></div>
+        </div>
       </div>
     </div>
 
