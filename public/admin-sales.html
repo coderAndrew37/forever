@@ -22,18 +22,45 @@
     <main class="max-w-7xl mx-auto py-10 px-6">
       <h2 class="text-2xl font-bold text-gray-800 mb-6">Sales Overview</h2>
 
-      <!-- ✅ Grid Layout for Charts -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- 📊 Revenue Trends Chart -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-lg font-semibold text-gray-600">Revenue Trends</h3>
-          <canvas id="revenueChart"></canvas>
-        </div>
+      <button
+        id="exportCSVBtn"
+        class="bg-yellow-500 text-white px-8 py-4 mb-10 rounded"
+      >
+        Export CSV
+      </button>
 
-        <!-- 📈 Orders Growth Chart -->
+      <!-- ✅ Date Filter Section -->
+      <div class="mb-6 flex flex-wrap gap-4">
+        <button
+          class="filter-btn bg-blue-500 text-white px-4 py-2 rounded"
+          data-range="7"
+        >
+          Last 7 Days
+        </button>
+        <button
+          class="filter-btn bg-green-500 text-white px-4 py-2 rounded"
+          data-range="30"
+        >
+          Last 30 Days
+        </button>
+        <input type="date" id="startDate" class="border px-4 py-2 rounded" />
+        <input type="date" id="endDate" class="border px-4 py-2 rounded" />
+        <button
+          id="customFilterBtn"
+          class="bg-gray-700 text-white px-4 py-2 rounded"
+        >
+          Apply Filter
+        </button>
+      </div>
+
+      <!-- ✅ Grid Layout for Charts & Insights -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- 📊 Orders & Sales Trend Chart -->
         <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-lg font-semibold text-gray-600">Orders Growth</h3>
-          <canvas id="ordersChart"></canvas>
+          <h3 class="text-lg font-semibold text-gray-600">
+            Orders & Sales Trend
+          </h3>
+          <canvas id="ordersTrendChart"></canvas>
         </div>
 
         <!-- 🏆 Top Selling Products -->
@@ -41,7 +68,19 @@
           <h3 class="text-lg font-semibold text-gray-600">
             Top Selling Products
           </h3>
-          <canvas id="topProductsChart"></canvas>
+          <ul id="topProductsList" class="list-disc pl-5 text-gray-700"></ul>
+        </div>
+
+        <!-- 👥 Customer Insights -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-lg font-semibold text-gray-600">Customer Insights</h3>
+          <p class="text-gray-700">
+            New Customers: <span id="newCustomers" class="font-bold">0</span>
+          </p>
+          <p class="text-gray-700">
+            Returning Customers:
+            <span id="returningCustomers" class="font-bold">0</span>
+          </p>
         </div>
 
         <!-- 📊 Sales by Category -->

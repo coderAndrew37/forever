@@ -5,6 +5,7 @@ const { Order } = require("../models/order.js");
 const User = require("../models/user.js");
 const { Testimonial } = require("../models/testimonial.js");
 const mongoose = require("mongoose");
+const { Parser } = require("json2csv");
 
 const router = express.Router();
 
@@ -128,6 +129,73 @@ router.get(
     } catch (error) {
       console.error("Error fetching customer insights:", error);
       res.status(500).json({ message: "Failed to fetch customer insights." });
+    }
+  }
+);
+
+// ✅ Sales by Category
+router.get(
+  "/stats/sales-category",
+  authMiddleware,
+  adminMiddleware,
+  async (req, res) => {
+    try {
+      const categorySales = await Order.aggregate([
+        { $unwind: "$items" },
+        {
+          $group: {
+            _id: "$items.category",
+            totalSales: { $sum: "$items.quantity" },
+          },
+        },
+        { $sort: { totalSales: -1 } },
+      ]);
+
+      res.status(200).json(categorySales);
+    } catch (error) {
+      console.error("Error fetching category sales:", error);
+      res.status(500).json({ message: "Failed to fetch category sales." });
+    }
+  }
+);
+
+// ✅ CSV Export Endpoint
+router.get(
+  "/sales/export",
+  authMiddleware,
+  adminMiddleware,
+  async (req, res) => {
+    try {
+      const { startDate, endDate } = req.query;
+      const query = {};
+
+      if (startDate && endDate) {
+        query.datePlaced = {
+          $gte: new Date(startDate),
+          $lte: new Date(endDate),
+        };
+      }
+
+      const orders = await Order.find(query).populate(
+        "items.productId",
+        "name"
+      );
+
+      const salesData = orders.map((order) => ({
+        datePlaced: order.datePlaced,
+        totalAmount: order.totalCents / 100,
+        items: order.items.map((item) => item.productId.name).join(", "),
+      }));
+
+      const parser = new Parser();
+      const csv = parser.parse(salesData);
+
+      res.header("Content-Type", "text/csv");
+      res.attachment("sales_report.csv");
+      res.send(csv);
+    } catch (error) {
+      console.error("Error exporting CSV:", error);
+      res.status(500).json({ message: "Failed to export sales report." });
     }
   }
 );
