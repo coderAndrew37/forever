@@ -229,20 +229,6 @@
         </div>
       </section>
 
-      <!-- ✅ Floating Booking Button (Mobile-Friendly) -->
-      <a
-        href="/booking.html"
-        class="fixed bottom-20 right-6 bg-yellow-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-yellow-600 transition block md:hidden"
-      >
-        <i class="fas fa-calendar-check mr-2"></i> Free Consultation
-      </a>
-
-      <div
-        class="js-products-grid grid grid-cols-8 gap-6 xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols-4 xs:grid-cols-3 2xs:grid-cols-2"
-      >
-        <!-- Search results will be rendered here -->
-      </div>
-
       <!-- Testimonials Section -->
       <section class="testimonials-section py-16 px-5 bg-gray-100">
         <div class="max-w-6xl mx-auto text-center">
@@ -441,18 +427,63 @@
       <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Floating whatsap button -->
-    <a
-      href="https://wa.me/254746577838?text=Hello%2C%20I%27m%20interested%20in%20learning%20more%20about%20your%20fashion%20products."
-      class="whatsapp-float"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Chat with us on WhatsApp"
-    >
-      <i class="fab fa-whatsapp"></i>
-      <span class="whatsapp-tooltip">Chat with Me!</span>
-    </a>
+    <!-- Floating Buttons Container -->
+    <div class="fixed bottom-6 right-6 flex flex-col space-y-3 z-50">
+      <!-- Floating WhatsApp Button -->
+      <a
+        href="https://wa.me/254724903107?text=Hello%2C%20I%27m%20interested%20in%20learning%20more%20about%20your%20Forever%20Living%20Products."
+        class="bg-green-500 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-600 transition flex items-center space-x-2"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with us on WhatsApp"
+      >
+        <i class="fab fa-whatsapp text-lg"></i>
+        <span>Chat with Me!</span>
+      </a>
 
+      <!-- Floating Testimonial Widget -->
+      <div
+        id="floatingTestimonialWidget"
+        class="bg-yellow-500 text-white px-4 py-3 rounded-full shadow-lg cursor-pointer hover:bg-yellow-600 transition flex items-center space-x-2"
+      >
+        <i class="fas fa-comment-alt text-lg"></i>
+        <span>Testimonials</span>
+      </div>
+
+      <!-- ✅ Floating Booking Button (Mobile-Friendly) -->
+      <a
+        href="/booking.html"
+        class="fixed bottom-20 right-6 bg-yellow-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-yellow-600 transition block md:hidden"
+      >
+        <i class="fas fa-calendar-check mr-2"></i> Free Consultation
+      </a>
+    </div>
+
+    <!-- Testimonial Modal -->
+    <div
+      id="floatingTestimonialModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full relative">
+        <button
+          id="closeFloatingTestimonialModal"
+          class="absolute top-3 right-3 text-gray-600 hover:text-red-500"
+        >
+          &times;
+        </button>
+        <h3 class="text-xl font-bold mb-4 text-center">
+          What Our Customers Say
+        </h3>
+        <div class="swiper floating-testimonial-swiper">
+          <div class="swiper-wrapper" id="testimonialSlider"></div>
+          <div class="swiper-button-prev text-yellow-500"></div>
+          <div class="swiper-button-next text-yellow-500"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notifications -->
     <div
       id="toast-container"
       class="fixed bottom-5 right-5 space-y-3 z-50"

@@ -19,6 +19,7 @@ import "./newsletter.js";
 import "./featuredTestimonials.js";
 import "./testimonials.js";
 import "./submitTestimonials.js";
+import "./floatingtestimonials.js";
 
 let currentPage = 1;
 let totalPages = 1;

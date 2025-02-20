@@ -1,0 +1,6 @@
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-20T09:36:42.303Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-20T09:36:43.149Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-20T10:40:25.378Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-20T10:40:25.395Z"}
+{"level":"info","message":"Server running on port 5000","timestamp":"2025-02-20T10:40:49.271Z"}
+{"level":"info","message":"Connected to MongoDB at mongodb://localhost:27017/forever-living","timestamp":"2025-02-20T10:40:49.288Z"}
